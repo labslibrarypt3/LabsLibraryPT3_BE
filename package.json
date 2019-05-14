@@ -1,0 +1,25 @@
+{
+  "name": "labslibrarypt3_be",
+  "version": "1.0.0",
+  "description": "Neighborhood Library Backend",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labslibrarypt3/LabsLibraryPT3_BE.git"
+  },
+  "author": "Katherine Rust, Thomas Utsey, Ira Sanchez, Lee Lichtsinn, Kelly Manahan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/labslibrarypt3/LabsLibraryPT3_BE/issues"
+  },
+  "homepage": "https://github.com/labslibrarypt3/LabsLibraryPT3_BE#readme",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0"
+  }
+}
