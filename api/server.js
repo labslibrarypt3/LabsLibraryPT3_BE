@@ -3,6 +3,8 @@ const server = express();
 const userDB = require('../DATA/helpers/usersDb');
 server.use(express.json());
 
+
+
 //GET
 server.get('/', (req, res) => {
     res.send('Hello World, from Neighborhood Library Backend');
@@ -36,6 +38,8 @@ server.get('/list', async (req, res) => {
       });
     }
   })
+
+
 //POST
 server.post('/add', async (req,res) => {
   console.log(req.body)
