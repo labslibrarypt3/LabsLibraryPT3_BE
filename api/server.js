@@ -1,8 +1,18 @@
 const express = require('express');
 const server = express();
 const userDB = require('../DATA/helpers/usersDb');
-server.use(express.json());
+const users = require('../routes/user-endpoints');
 
+const helmet = require('helmet');
+const morgan = require('morgan');
+const cors = require('cors');
+
+server.use(express.json());
+server.use(helmet());
+server.use(morgan('dev'));
+server.use(cors());
+
+server.use('/api/users', users);
 
 
 //GET
@@ -39,19 +49,4 @@ server.get('/list', async (req, res) => {
     }
   })
 
-
-//POST
-server.post('/add', async (req,res) => {
-  console.log(req.body)
-  const enter = req.body
-    try {
-      const user = await userDB.insert(enter);
-      res.status(201).json(user);
-    } catch (error) {
-      // log error to database
-      res.status(500).json({
-        message: 'Error adding the User',
-      });
-    }
-  });
 module.exports = server;

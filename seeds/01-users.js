@@ -8,6 +8,7 @@ exports.seed = function(knex, Promise) {
   for (let i = 1; i <= 200; i++) {
     fakeUsers.push(fake.createFakeUser());
   }
+  
       console.log(fakeUsers)
       return knex('Users').insert(fakeUsers
         
