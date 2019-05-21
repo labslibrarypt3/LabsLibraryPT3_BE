@@ -39,7 +39,7 @@ server.get('/list', async (req, res) => {
 //POST
 server.post('/add', async (req,res) => {
     try {
-      const user = await userDB.insert(req.query);
+      const user = await userDB.insert(req.body);
       res.status(201).json(user);
     } catch (error) {
       // log error to database
