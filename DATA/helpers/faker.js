@@ -15,4 +15,3 @@ module.exports={
 
 
 
-faker.fake("{{name.firstName}} {{name.lastName}} {{internet.email}} {{phone.phoneNumber}}")

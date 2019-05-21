@@ -19,6 +19,7 @@ function getById(id) {
 }
 
 function insert(user) {
+  console.log(user)
   return db('Users')
     .insert(user)
     // .then(ids => {

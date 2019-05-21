@@ -38,8 +38,10 @@ server.get('/list', async (req, res) => {
   })
 //POST
 server.post('/add', async (req,res) => {
+  console.log(req.body)
+  const enter = req.body
     try {
-      const user = await userDB.insert(req.body);
+      const user = await userDB.insert(enter);
       res.status(201).json(user);
     } catch (error) {
       // log error to database
