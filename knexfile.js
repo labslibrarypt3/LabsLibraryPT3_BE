@@ -1,3 +1,14 @@
+
+
+const localPgConnection = {
+  host: 'localhost',
+  database: 'UserDB',
+  user: 'bookLover',
+  password: 'readingIsFun'
+};
+
+const prodDbConnection = process.env.DATABASE_URL || localPgConnection;
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -12,4 +23,14 @@ module.exports = {
       directory: './seeds'
     }
   },
+  production: {
+    client: 'pg',
+    connection: prodDbConnection ,
+    migrations: {
+      directory: './migrations',
+    },
+    seeds: {
+      directory: './seeds',
+    },
+  }
 };
