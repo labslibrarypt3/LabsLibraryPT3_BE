@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require("express");
 const server = express();
 const userDB = require("../DATA/helpers/usersDb");
@@ -7,14 +8,28 @@ const goodreadsRoutes = require("./goodreads");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+=======
+const express = require('express');
+const helmet = require('helmet');
+const logger = require('morgan');
+const cors = require('cors');
+const userDB = require('../DATA/helpers/usersDb');
+>>>>>>> e97753dc8c45b609ccf75ca780771da26927b6fa
+
+const server = express();
 
 server.use(express.json());
 server.use(helmet());
+<<<<<<< HEAD
 server.use(morgan("dev"));
 server.use(cors());
 
 server.use("/api/users", users);
 server.use("/api/goodreads", goodreadsRoutes);
+=======
+server.use(logger('dev'));
+server.use(cors());
+>>>>>>> e97753dc8c45b609ccf75ca780771da26927b6fa
 
 //GET
 server.get("/", (req, res) => {
@@ -49,5 +64,8 @@ server.get("/list", async (req, res) => {
     });
   }
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> e97753dc8c45b609ccf75ca780771da26927b6fa
 module.exports = server;
