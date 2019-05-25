@@ -16,10 +16,9 @@ auth.get('/callback',(req, res, next) => {
           })
         
       }
-      next();
-
+      
       request
-      .post('http://github.com/login/oauth/access_token')
+      .post(`http://github.com/login/oauth/access_token`)
       .send({
           client_id: '66d10ed2a42e30acdfcb',
           client_secret:'b78a4b174578404adddd85e5d7b620fd9713e109',
