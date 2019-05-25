@@ -1,8 +1,5 @@
 require('dotenv').config();
 const server = require('./api/server.js');
-// const knex = require('knex');
-// const knexConfig = require('./knexfile');
-// const userDB = knex(knexConfig.development)
 
 PORT = process.env.PORT || 9001;
 
