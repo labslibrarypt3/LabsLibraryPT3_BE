@@ -6,7 +6,7 @@ const router = express.Router();
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
-router.post("/search", (req, res) => {
+router.get("/search", (req, res) => {
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${

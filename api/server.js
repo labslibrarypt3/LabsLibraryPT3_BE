@@ -1,7 +1,7 @@
 const express = require("express");
 const userDB = require("../DATA/helpers/usersDb");
 const users = require("../routes/user-endpoints");
-const goodreadsRoutes = require("./goodreads");
+const goodreadsRoutes = require("../routes/goodreads");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
