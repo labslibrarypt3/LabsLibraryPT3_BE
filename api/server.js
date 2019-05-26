@@ -59,17 +59,5 @@ server.get('/users', (req, res) => {
     res.send('users page here');
 });
 
-// get a list of users
-server.get('/list', async (req, res) => {
-    try {
-      const user = await userDB.get(req.query);
-      res.status(200).json(user);
-    } catch (error) { 
-      console.log(error);
-      res.status(500).json({
-        message: 'Error retrieving the Users',
-      });
-    }
-  })
 
 module.exports = server;
