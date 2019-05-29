@@ -13,8 +13,18 @@ const prodDbConnection = process.env.DATABASE_URL || localPgConnection;
 
 module.exports = {
   development: {
-    client: "pg",
-    connection: prodDbConnection,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b03fec513429f933f5284723c338f7b677493f6
+    client: 'pg',
+    connection: prodDbConnection ,
+    useNullAsDefault: true,
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b03fec513429f933f5284723c338f7b677493f6
     migrations: {
       directory: "./migrations"
     },
