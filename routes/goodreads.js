@@ -11,7 +11,7 @@ router.get("/search", (req, res) => {
     .get(
       `https://www.goodreads.com/search/index.xml?key=${
         process.env.GOODREADS_KEY
-      }&q=${req.params.q}`
+      }&q=${req.body.title || req.body.authors}`
     )
     .then(result =>
       parseString(result, (err, goodreadsResult) =>
