@@ -4,13 +4,12 @@ const server = express();
 const userDB = require('../DATA/helpers/usersDb');
 const users = require('../routes/user-endpoints');
 const auths = require('../routes/oauth/githubauth');
-
-
 const goodreadsRoutes = require("../routes/goodreads");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+
 
 
 const server = express();
@@ -42,6 +41,7 @@ server.use(
 
 server.use('/api/users', users);
 server.use('/auths',auths)
+server.use("/api/goodreads", goodreadsRoutes);
 
 
 
@@ -73,5 +73,6 @@ server.get("/users", (req, res) => {
 
 
 module.exports = server;
+
 
 
