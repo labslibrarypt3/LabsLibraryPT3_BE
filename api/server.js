@@ -1,18 +1,13 @@
-
-const express = require('express');
+const express = require("express");
 const server = express();
-const userDB = require('../DATA/helpers/usersDb');
-const users = require('../routes/user-endpoints');
-const auths = require('../routes/oauth/githubauth');
+const userDB = require("../DATA/helpers/usersDb");
+const users = require("../routes/user-endpoints");
+const auths = require("../routes/oauth/githubauth");
 const goodreadsRoutes = require("../routes/goodreads");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-
-
-
-const server = express();
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,11 +21,14 @@ server.use(function(req, res, next) {
 server.use(express.json());
 server.use(helmet());
 
-server.use(morgan('dev'));
+server.use(morgan("dev"));
 server.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000/", "https://goofy-mayer-45bb20.netlify.com/"],
+    origin: [
+      "http://localhost:3000/",
+      "https://goofy-mayer-45bb20.netlify.com/"
+    ],
     AccessControlAllowOrigin: [
       "http://localhost:4000/",
       "https://pt3-neighborhood-library-back.herokuapp.com/"
@@ -39,15 +37,9 @@ server.use(
   })
 );
 
-server.use('/api/users', users);
-server.use('/auths',auths)
+server.use("/api/users", users);
+server.use("/auths", auths);
 server.use("/api/goodreads", goodreadsRoutes);
-
-
-
-
-
-
 
 //GET
 server.get("/", (req, res) => {
@@ -70,9 +62,4 @@ server.get("/users", (req, res) => {
   res.send("users page here");
 });
 
-
-
 module.exports = server;
-
-
-
