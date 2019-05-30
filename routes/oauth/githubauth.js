@@ -1,15 +1,14 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../../DATA/helpers/usersDb');
-var bcrypt = require('bcrypt');
+const db = require("../../DATA/helpers/usersDb");
+var bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
-router.post('/callback',async (req, res) => {
-    console.log(req.body)
-    res.status(200).json(req.body);
-})
-    
+router.post("/callback", async (req, res) => {
+  console.log(req.body);
+  res.status(200).json(req.body);
+});
+
 module.exports = router;
 
 // router.post('/add', async (req,res) => {
