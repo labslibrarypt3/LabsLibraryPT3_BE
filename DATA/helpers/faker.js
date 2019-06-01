@@ -1,10 +1,11 @@
 const faker = require("faker");
 
 const createFakeUser = () => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  name:faker.name.findName(),
+  // lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  phoneNumber: faker.phone.phoneNumber(0)
+  // phoneNumber: faker.phone.phoneNumber(0)
+  password: faker.internet.password()
 });
 module.exports={
   createFakeUser

@@ -2,12 +2,28 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../DATA/helpers/usersDb');
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
+const crypt = require ('bcryptjs')
 
-router.post('/callback',async (req, res) => {
-    console.log(req.body)
-    res.status(200).json(req.body);
+
+router.post('/callback',async (req, res, next) => {
+ let user = req.body
+ let password = user.token
+ console.log(password)
+ const hash = crypt.hashSync(password, 10);
+ const huser = {
+     name: user.name,
+     email: user.email,
+     password:hash
+ }
+ try {
+ const userO  = await db.insert(huser);
+ res.status(200).json(userO);
+ } catch (error){
+     console.log(error);
+     res.status(500).json({
+        message: 'Error registering the User'
+     })
+ }
 })
     
 module.exports = router;
