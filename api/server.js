@@ -46,20 +46,4 @@ server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
 
-server.get("/account", (req, res) => {
-  res.send("account page here");
-});
-
-server.get("/mybookshelf", (req, res) => {
-  res.send("mybookshelf page here");
-});
-
-server.get("/books", (req, res) => {
-  res.send("books page here");
-});
-
-server.get("/users", (req, res) => {
-  res.send("users page here");
-});
-
 module.exports = server;
