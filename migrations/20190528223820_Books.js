@@ -2,9 +2,9 @@
 exports.up = function(knex) {
     return knex.schema.createTable('Books', table => {
         table.increments();
-        table.integer('Library','integer Array')
-        table.integer('Borrowed','integer Array')
-        table.integer('Lent','integer Array')
+        table.integer('Library')
+        table.integer('Borrowed')
+        table.integer('Lent')
 });
 }
 
