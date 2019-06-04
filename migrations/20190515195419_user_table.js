@@ -9,7 +9,11 @@
             
     })
     };
-    
+    //User
+// - id
+// - Library
+// - lent
+// - Borrowing
     exports.down = function(knex) {
         return knex.schema.dropTableIfExists('Users');
     };

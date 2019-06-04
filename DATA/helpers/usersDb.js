@@ -20,8 +20,8 @@ function getById(id) {
 }
 function getByEmail(email){
   return db('Users')
-    .where({email})
-    .first();
+    .where({email} )
+    
 }
 
 function insert(user) {

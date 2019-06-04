@@ -2,29 +2,21 @@
 exports.up = function(knex) {
     return knex.schema.createTable('Books', table => {
         table.increments();
-        table.string('Library')
+        table.string('title')
              .notNullable();
-        table.string('status')
+        table.string('authors')
              .notNullable();
-        table
-             .timestamp("created_at")
-             .notNullable()
-             
-
-        table
-             .timestamp("updated_at")
-             .notNullable()
-        
-        table
-             .string("Due date")
-             .notNullable()
-             
-        table.bigInteger('user_id')
-             .references('id')
-             .inTable('Users')
+        table.integer('ISBN')
+             .notNullable()  
+   
             
 });
 }
+// Book
+// - id
+// - title
+// - authors
+// - ISBN
 
     exports.down = function(knex) {
         return knex.schema.dropTableIfExists('Books');
