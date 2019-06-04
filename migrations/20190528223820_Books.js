@@ -2,9 +2,27 @@
 exports.up = function(knex) {
     return knex.schema.createTable('Books', table => {
         table.increments();
-        table.integer('Library','integer Array')
-        table.integer('Borrowed','integer Array')
-        table.integer('Lent','integer Array')
+        table.string('Library')
+             .notNullable();
+        table.string('status')
+             .notNullable();
+        table
+             .timestamp("created_at")
+             .notNullable()
+             
+
+        table
+             .timestamp("updated_at")
+             .notNullable()
+        
+        table
+             .string("Due date")
+             .notNullable()
+             
+        table.bigInteger('user_id')
+             .references('id')
+             .inTable('Users')
+            
 });
 }
 
