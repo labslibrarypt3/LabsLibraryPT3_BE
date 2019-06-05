@@ -6,6 +6,9 @@
             table.string('name').notNullable();
             table.string('email').unique().notNullable();
             table.string('password').notNullable();
+            table.string('library')
+            table.string('lent')
+            table.string('borrowed')
             
     })
     };
