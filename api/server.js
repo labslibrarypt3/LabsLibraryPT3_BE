@@ -4,6 +4,7 @@ const userDB = require("../DATA/helpers/usersDb");
 const users = require("../routes/user-endpoints");
 const auths = require("../routes/oauth/githubauth");
 const goodreadsRoutes = require("../routes/goodreads");
+const stripeRouting = require("../routes/stripe/striperoutes");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -40,6 +41,7 @@ server.use(
 server.use("/api/users", users);
 server.use("/auths", auths);
 server.use("/api/goodreads", goodreadsRoutes);
+server.use("/api/striperoutes", stripeRouting);
 
 //GET
 server.get("/", (req, res) => {
@@ -61,5 +63,6 @@ server.get("/books", (req, res) => {
 server.get("/users", (req, res) => {
   res.send("users page here");
 });
+
 
 module.exports = server;

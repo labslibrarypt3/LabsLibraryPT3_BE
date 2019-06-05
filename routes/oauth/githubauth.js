@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../DATA/helpers/usersDb');
-var bcrypt = require('bcrypt');
+var bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
 router.post('/callback',async (req, res) => {
