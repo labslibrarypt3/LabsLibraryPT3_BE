@@ -1,15 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const db = require('../../DATA/helpers/usersDb');
-const crypt = require ('bcryptjs')
-const jwt = require ('jsonwebtoken');
+const db = require("../../DATA/helpers/usersDb");
+const crypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
+router.post("/oauth", async (req, res, next) => {
+  let user = req.body;
+  let password = user.token;
+  console.log(password);
+  const hash = crypt.hashSync(password, 10);
 
-
-
-router.post('/register',async (req, res) => {
-console.log(req.body)
-
+  const huser = {
+    name: user.name,
+    email: user.email,
+    password: hash
+  };
+  if (db.getByEmail(huser.email)) {
+    const jtoken = jwt.sign(
+      {
+        sub: user.email,
+        name: user.name
+      },
+      "mysupersecretkey",
+      { expiresIn: "3 hours" }
+    );
 
  let user = req.body
  let password = user.token
