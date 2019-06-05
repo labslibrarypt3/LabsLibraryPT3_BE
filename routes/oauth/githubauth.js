@@ -1,35 +1,92 @@
-const express = require('express');
-const request = require('superagent');
+const express = require("express");
+const router = express.Router();
+const db = require('../../DATA/helpers/usersDb');
+const crypt = require ('bcryptjs')
+const jwt = require ('jsonwebtoken');
 
 
-module.exports = (auth) => {
 
-auth.get('/callback',(req, res, next) => {
+
+router.post('/register',async (req, res) => {
+console.log(req.body)
+
+
+ let user = req.body
+ let password = user.token
+
+ 
+ const hash = crypt.hashSync(password, 10);
+ 
+ 
+ const huser = {
+     name: user.name,
+     email: user.email,
+     password:hash
+    }
+    // console.log(huser)
+
+ if (db.getByEmail(huser.email)){
+    
+    
+    const jtoken = jwt.sign({
+        sub:user.email,
+        name:user.name
    
-      const { query } = req;
-      const { code } = code;
+    },"mysupersecretkey",{expiresIn:"3 hours"})
+     
+     return res.status(200)
+     .send({jtoken});
+    }
+ try {
+ const userO  = await db.insert(huser);
+ 
+ res.status(200).json(userO);
+ } catch (error){
+     res.status(500).json({
+        message: 'Error registering the User try alternative login method'
+     })
+ }
+})
 
-      if (!code){
-          return res.send({
-              success: false,
-              message: 'Error: no code',
-          })
+router.post('/login',async (req, res) => {
+
+    let user = req.body
+    
+    let password = user.token
+   
+    
+    const hash = crypt.hashSync(password, 10);
+    
+    
+    const huser = {
+        name: user.name,
+        email: user.email,
+        password:hash
+       }
+       // console.log(huser)
+   
+    if (db.getByEmail(huser.email)){
+       
+       
+       const jtoken = jwt.sign({
+           sub:user.email,
+           name:user.name
+      
+       },"mysupersecretkey",{expiresIn:"3 hours"})
         
-      }
-      next();
+        return res.status(200)
+        .send({jtoken});
+       }
+    try {
+    const userO  = await db.insert(huser);
+    
+    res.status(200).json(userO);
+    } catch (error){
+        res.status(500).json({
+           message: 'Error registering the User try alternative login method'
+        })
+    }
+   })
+    
+module.exports = router;
 
-      request
-      .post('http://github.com/login/oauth/access_token')
-      .send({
-          client_id: '66d10ed2a42e30acdfcb',
-          client_secret:'b78a4b174578404adddd85e5d7b620fd9713e109',
-          code: code
-      })
-      .set('Accept','application/json')
-      .then(function(result){
-          const data = result.body;
-          console.log(result)
-          res.send(data);
-      });
-    });
-};
