@@ -1,5 +1,4 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const db = require('../../DATA/helpers/usersDb');
 const crypt = require ('bcryptjs')
@@ -59,3 +58,4 @@ router.post('/login', (req, res) => {
    })
     
 module.exports = router;
+

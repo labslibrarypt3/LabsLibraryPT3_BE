@@ -7,11 +7,12 @@ const request = require("request-promise");
 const { parseString } = require("xml2js");
 
 router.get("/search", (req, res) => {
+  console.log(req);
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${
         process.env.GOODREADS_KEY
-      }&q=${req.body.title || req.body.authors}`
+      }&q=${req.query.q}`
     )
     .then(result =>
       parseString(result, (err, goodreadsResult) =>
