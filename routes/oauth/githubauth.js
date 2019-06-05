@@ -50,9 +50,11 @@ console.log(req.body)
 
 router.post('/login', (req, res) => {
     
-   const email = req.body.email
+   const hi = req.body
    const user = db.getByEmail(email)
-   console.log(email,user)
+   
+   res.status(200).JSON(hi);
+   
    })
     
 module.exports = router;
