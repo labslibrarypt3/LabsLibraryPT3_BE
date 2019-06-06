@@ -20,7 +20,7 @@ function getById(id) {
 }
 function getByEmail(email){
   return db('Users')
-    .where([{"email":email}] )
+    .where('email', email )
     
 }
 
