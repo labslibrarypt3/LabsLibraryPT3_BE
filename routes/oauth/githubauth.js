@@ -62,44 +62,13 @@ router.post("/oauth", async (req, res, next) => {
  }
 })
 
-router.post('/login',async (req, res) => {
-
-    let user = req.body
+router.post('/login', (req, res) => {
     
-    let password = user.token
+   const hi = req.body
+   const user = db.getByEmail(email)
    
-    
-    const hash = crypt.hashSync(password, 10);
-    
-    
-    const huser = {
-        name: user.name,
-        email: user.email,
-        password:hash
-       }
-       // console.log(huser)
+   res.status(200).JSON(hi);
    
-    if (db.getByEmail(huser.email)){
-       
-       
-       const jtoken = jwt.sign({
-           sub:user.email,
-           name:user.name
-      
-       },"mysupersecretkey",{expiresIn:"3 hours"})
-        
-        return res.status(200)
-        .send({jtoken});
-       }
-    try {
-    const userO  = await db.insert(huser);
-    
-    res.status(200).json(userO);
-    } catch (error){
-        res.status(500).json({
-           message: 'Error registering the User try alternative login method'
-        })
-    }
    })
     
 module.exports = router;
