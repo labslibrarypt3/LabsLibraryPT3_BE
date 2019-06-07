@@ -10,6 +10,7 @@ router.post("/oauth", async (req, res, next) => {
   console.log(password);
   const hash = crypt.hashSync(password, 10);
 
+<<<<<<< HEAD
   const huser = {
     name: user.name,
     email: user.email,
@@ -24,36 +25,32 @@ router.post("/oauth", async (req, res, next) => {
       "mysupersecretkey",
       { expiresIn: "3 hours" }
     );
+=======
+
+
+router.post('/register',async (req, res) => {
+>>>>>>> 9850c4607899934328514aae0b8627e668c5f45c
 
  let user = req.body
  let password = user.token
 
- 
  const hash = crypt.hashSync(password, 10);
- 
  
  const huser = {
      name: user.name,
      email: user.email,
      password:hash
     }
-    // console.log(huser)
-
- if (db.getByEmail(huser.email)){
-    
     
     const jtoken = jwt.sign({
         sub:user.email,
         name:user.name
    
-    },"mysupersecretkey",{expiresIn:"3 hours"})
-     
-     return res.status(200)
-     .send({jtoken});
-    }
+    },"mysupersecretkey",{expiresIn:"3 minutes"})
+   //   console.log(jtoken)
  try {
  const userO  = await db.insert(huser);
- 
+ console.log(huser)
  res.status(200).json(userO);
  } catch (error){
      res.status(500).json({
@@ -62,14 +59,34 @@ router.post("/oauth", async (req, res, next) => {
  }
 })
 
-router.post('/login', (req, res) => {
+// router.post('/add', async (req,res) => {
+//    console.log(req.body)
+//    const enter = req.body
+//      try {
+//        const user = enterawait db.insert();
+//        res.status(201).json(user);
+//      } catch (error) {
+//        // log error to database
+//        res.status(500).json({
+//          message: 'Error adding the User',
+//        });
+//      }
+//    });
+
+// router.get('/login', async (req, res) => {
     
-   const hi = req.body
-   const user = db.getByEmail(email)
-   
-   res.status(200).JSON(hi);
-   
-   })
+//    const hi = req.body
+//    try{
+//    const user = db.get(req.body.email)
+//    console.log(user)
+//    res.status(200).JSON(hi);
+//    }
+//    catch (error){
+//       res.status(500).json({
+//          message: 'Error registering the User try alternative login method'
+//       })
+//   }
+//    })
     
 module.exports = router;
 

@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
       message: "Error retrieving the Users"
     });
   }
+<<<<<<< HEAD
 });
 
 // Add a user with post
@@ -77,3 +78,36 @@ router.get("/users", (req, res) => {
 // });
 
 module.exports = router;
+=======
+})
+router.get("/Library", (req, res) => {
+  res.send("mybookshelf page here");
+});
+
+router.get("/borrowed", (req, res)=>{
+  res.send("borrowed axios calls here for list of borrowed books")
+})
+router.get("/lent", (req, res)=>{
+  res.send("lent axios calls here for list of books lent out")
+})
+
+// Add a user with post
+
+
+  router.get("/account", (req, res) => {
+    res.send("account page here");
+  });
+  
+
+  
+  router.get("/books", (req, res) => {
+    res.send("books page here");
+  });
+  
+  router.get("/users", (req, res) => {
+    res.send("users page here");
+  });
+
+  
+module.exports = router; 
+>>>>>>> 9850c4607899934328514aae0b8627e668c5f45c
