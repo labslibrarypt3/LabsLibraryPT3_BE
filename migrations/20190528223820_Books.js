@@ -2,11 +2,21 @@
 exports.up = function(knex) {
     return knex.schema.createTable('Books', table => {
         table.increments();
-        table.integer('Library','integer Array')
-        table.integer('Borrowed','integer Array')
-        table.integer('Lent','integer Array')
+        table.string('title')
+             .notNullable();
+        table.string('authors')
+             .notNullable();
+        table.integer('ISBN')
+             .notNullable()  
+   
+            
 });
 }
+// Book
+// - id
+// - title
+// - authors
+// - ISBN
 
     exports.down = function(knex) {
         return knex.schema.dropTableIfExists('Books');
