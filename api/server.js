@@ -4,6 +4,7 @@ const userDB = require("../DATA/helpers/usersDb");
 const users = require("../routes/user-endpoints");
 const auths = require("../routes/oauth/githubauth");
 const goodreadsRoutes = require("../routes/goodreads");
+const trans = require("../routes/transaction-endpoints")
 
 
 const helmet = require("helmet");
@@ -41,6 +42,7 @@ server.use(
 server.use("/api/users", users);
 server.use("/auths", auths);
 server.use("/api/goodreads", goodreadsRoutes);
+server.use("/api/trans", trans);
 
 //GET
 server.get("/", (req, res) => {

@@ -7,7 +7,7 @@ const jwt = require ('jsonwebtoken');
 
 
 
-router.post('/oauth',async (req, res) => {
+router.post('/auth',async (req, res) => {
 
  let user = req.body
  let password = user.token
