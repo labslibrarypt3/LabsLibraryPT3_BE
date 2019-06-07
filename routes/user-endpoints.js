@@ -49,11 +49,31 @@ router.get("/users", (req, res) => {
 });
 
 //add book to personal library
-router.post("/users/:id/add-book", (res, res) => {
-  //use "getByID" to find the right spot in the db
-    // double check training kit to see if getByID is necessary here or if we already should have that data due to the URL
-  //use "insert" to add a book object to the library
-  res.send("User can now lend this book out to neighbs")
-})
+//notes
+// router.post("/:id/add-book", (res, res) => {
+//   //use "getByID" to find the right spot in the db
+//     // double check training kit to see if getByID is necessary here or if we already should have that data due to the URL
+//   //use "insert" to add a book object to the library
+//   res.send("User can now lend this book out to neighbs")
+// })
+
+// router.post('/:id/add-book', (req, res) => {
+//   db('users', 'id')
+//     .insert(req.body)
+//     .then(ids => {
+//         // returns an array with one element, the id of the last record inserted const [id] = ids;
+//         // de-structure the first element of the array and name it 'id'
+//         // we could return the id of the or make another call to retrieve the newly inserted record
+//         db('users')
+//           .where({ id })
+//           .first()
+//           .then(role => {
+//           res.status(200).json(role);
+//     });
+//   })
+//   .catch(error => {
+//     res.status(500).json(error);
+//   });
+// });
 
 module.exports = router;
