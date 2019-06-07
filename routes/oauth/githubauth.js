@@ -7,13 +7,16 @@ const jwt = require ('jsonwebtoken');
 
 
 
-router.post('/register',async (req, res) => {
+router.post('/auth',async (req, res) => {
 
  let user = req.body
  let password = user.token
 
- const hash = crypt.hashSync(password, 10);
+ const xuser = await db.getByEmail(user.email)
  
+
+ const hash = crypt.hashSync(password, 10);
+ if(!xuser){
  const huser = {
      name: user.name,
      email: user.email,
@@ -25,15 +28,26 @@ router.post('/register',async (req, res) => {
         name:user.name
    
     },"mysupersecretkey",{expiresIn:"3 minutes"})
-   //   console.log(jtoken)
+     console.log(jtoken)
  try {
  const userO  = await db.insert(huser);
  console.log(huser)
- res.status(200).json(userO);
+ res.status(200).json(jtoken);
  } catch (error){
      res.status(500).json({
         message: 'Error registering the User try alternative login method'
      })
+ }}else{
+    
+
+    const jtoken = jwt.sign({
+        sub:user.email,
+        name:user.name
+   
+    },"mysupersecretkey",{expiresIn:"3 minutes"})
+     console.log(jtoken)
+
+    res.status(200).json((`${jtoken} already a member`))
  }
 })
 

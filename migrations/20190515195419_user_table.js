@@ -5,11 +5,7 @@
             table.increments('userId');
             table.string('name').notNullable();
             table.string('email').unique().notNullable();
-            table.string('password').notNullable();
-            table.string('library').notNullable();
-            table.string('lent').notNullable();
-            table.string('borrowed').notNullable();
-            
+            table.string('password').notNullable();       
     })
     };
     //User

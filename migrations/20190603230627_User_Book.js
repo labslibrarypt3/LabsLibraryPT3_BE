@@ -3,6 +3,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('User_Book', table =>{
         table.increments('checkoutId');
+
         table.bigInteger('lender_id')
             .references('userId')
             .inTable('Users')
@@ -13,10 +14,7 @@ exports.up = function(knex, Promise) {
 
         table.bigInteger('book_id')
              .references('bookId')
-             .inTable('Books')
-        
-        
-     
+             .inTable('Books') 
         
 })
 
