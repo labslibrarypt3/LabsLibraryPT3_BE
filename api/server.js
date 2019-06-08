@@ -7,6 +7,8 @@ const goodreadsRoutes = require("../routes/goodreads");
 const trans = require("../routes/transaction-endpoints")
 const books = require("../routes/books-endpoints")
 
+const stripeRouting = require("../routes/stripe/striperoutes");
+
 
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -43,12 +45,32 @@ server.use(
 server.use("/api/users", users);
 server.use("/auths", auths);
 server.use("/api/goodreads", goodreadsRoutes);
+
 server.use("/api/trans", trans);
 server.use("/api/books", books)
+server.use("/api/striperoutes", stripeRouting);
+
 
 //GET
 server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
+
+server.get("/account", (req, res) => {
+  res.send("account page here");
+});
+
+server.get("/mybookshelf", (req, res) => {
+  res.send("mybookshelf page here");
+});
+
+server.get("/books", (req, res) => {
+  res.send("books page here");
+});
+
+server.get("/users", (req, res) => {
+  res.send("users page here");
+});
+
 
 module.exports = server;
