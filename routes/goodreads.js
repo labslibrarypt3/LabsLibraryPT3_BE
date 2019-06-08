@@ -30,4 +30,6 @@ router.get("/search", (req, res) => {
     );
 });
 
+// route to add a book to personal library so that one can lend it out will be in user-endpoints.js
+
 module.exports = router;
