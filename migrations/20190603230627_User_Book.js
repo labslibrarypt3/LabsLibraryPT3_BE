@@ -1,13 +1,20 @@
-
+// this table handles transactions for the borrowing and lending components possible to use checkoutId as foreign
+// timetable to handle due dates and checkout dates.
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('User_Book', table =>{
-        table.bigInteger('user_id')
-        .references('id')
-        .inTable('Users')
+        table.increments('checkoutId');
+
+        table.bigInteger('lender_id')
+            .references('userId')
+            .inTable('Users')
+
+        table.bigInteger('borrower_id')
+             .references('userId')
+             .inTable('Users')
 
         table.bigInteger('book_id')
-             .references('id')
-             .inTable('Books')
+             .references('bookId')
+             .inTable('Books') 
         
 })
 
