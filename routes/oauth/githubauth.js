@@ -32,7 +32,7 @@ router.post('/auth',async (req, res) => {
  try {
  const userO  = await db.insert(huser);
  console.log(huser)
- res.status(200).json(jtoken);
+ res.status(200).json(jtoken,xuser).redirect('http:/localhost:3000/components/Account/Account');
  } catch (error){
      res.status(500).json({
         message: 'Error registering the User try alternative login method'

@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
     const enter = req.body
       try {
         const user = await db.insert(enter);
-        res.status(201).json(user);
+        console.log
+        res.status(201).json(enter);
       } catch (error) {
         // log error to database
         res.status(500).json({
