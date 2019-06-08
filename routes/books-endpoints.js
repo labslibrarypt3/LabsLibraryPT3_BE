@@ -14,21 +14,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  console.log(req.body);
-
-  const enter = req.body;
-
-  try {
-    const user = await db.insert(enter);
-
-    res.status(201).json(user);
-  } catch (error) {
-    // log error to database
-
-    res.status(500).json({
-      message: "Error adding the book"
+  router.post('/', async (req,res) => {
+    console.log(req.body)
+    const enter = req.body
+      try {
+        const user = await db.insert(enter);
+        res.status(201).json(enter);
+      } catch (error) {
+        // log error to database
+        res.status(500).json({
+          message: 'Error adding the book',
+        });
+      }
     });
-  }
-});
+  
+
 module.exports = router;
