@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
       message: "Error retrieving the Users"
     });
   }
-<<<<<<< HEAD
 });
 
 // Add a user with post
@@ -78,41 +77,3 @@ router.get("/users", (req, res) => {
 // });
 
 module.exports = router;
-=======
-})
-
-
-// Add a user with post
-router.post('/add', async (req,res) => {
-  console.log(req.body)
-  const enter = req.body
-    try {
-      const user = await db.insert(enter);
-      res.status(201).json(user);
-    } catch (error) {
-      // log error to database
-      res.status(500).json({
-        message: 'Error adding the User',
-      });
-    }
-  });
-
-  router.get("/account", (req, res) => {
-    res.send("account page here");
-  });
-  
-  router.get("/mybookshelf", (req, res) => {
-    res.send("mybookshelf page here");
-  });
-  
-  router.get("/books", (req, res) => {
-    res.send("books page here");
-  });
-  
-  router.get("/users", (req, res) => {
-    res.send("users page here");
-  });
-
-  
-module.exports = router; 
->>>>>>> 9850c4607899934328514aae0b8627e668c5f45c
