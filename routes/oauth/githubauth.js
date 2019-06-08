@@ -46,7 +46,8 @@ router.post('/auth',async (req, res) => {
    
     },"mysupersecretkey",{expiresIn:"3 minutes"})
      console.log(jtoken)
-
+    console.log (xuser)
+    
     res.status(200).json((`${jtoken} already a member`))
  }
 })
