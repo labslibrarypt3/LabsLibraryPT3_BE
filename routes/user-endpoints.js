@@ -5,9 +5,18 @@ const jwt = require("jsonwebtoken");
 const ejwt = require("express-jwt");
 
 // view list of users
-router.get("/", async (req, res) => {
+// router.get("/user", async(req,res)=>{
+//   try{
+    
+//   }catch{
+
+//   }
+// })
+
+
+router.get("/user", async (req, res) => {
   try {
-    const user = await db.get(req.query);
+    const user = await db.getById(req.body);
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
