@@ -15,13 +15,13 @@ function get() {
 
 function getById(id) {
   return db('Users')
-    .where({ id })
-    .first();
+    .where("userId",id)
 }
+
 function getByEmail(email){
   return db('Users')
-    .where('email', email )
-    
+  .where("email",email)
+  .first()   
 }
 
 function insert(user) {
@@ -35,7 +35,7 @@ function insert(user) {
 
 function update(id, changes) {
   return db('Users')
-    .where({ id })
+    .where({ userId})
     .update(changes);
 }
 
