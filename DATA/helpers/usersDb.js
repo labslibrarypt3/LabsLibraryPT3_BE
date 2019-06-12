@@ -13,10 +13,17 @@ function get() {
   return db('Users');
 }
 
-function getById(id) {
+function getById(userId) {
   return db('Users')
-    .where("userId",id)
+    .where(userId)
+    .first();
+
 }
+// function getByBorroworId(borrower_id) {
+//   return db('User_Book')
+//     .where(borrower_id)
+//     .first();
+// }
 
 function getByEmail(email){
   return db('Users')
