@@ -6,6 +6,9 @@ const restricted = require("../middleware/restricted");
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
+//continue with tutorial that's helping me with jwt
+// https://youtu.be/7nafaH9SddU?t=1050
+
 router.get("/search", restricted, (req, res) => {
   jwt.verify(req.token, "secretkey", (err, userData) => {
     if (err) {
@@ -36,6 +39,6 @@ router.get("/search", restricted, (req, res) => {
   });
 });
 
-// route to add a book to personal library so that one can lend it out will be in user-endpoints.js
+// route to add a book to personal library so that one can lend it out is in user-endpoints.js
 
 module.exports = router;
