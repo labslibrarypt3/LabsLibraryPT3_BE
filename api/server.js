@@ -1,6 +1,5 @@
 const express = require("express");
 const server = express();
-const session = require("express-session");
 const userDB = require("../DATA/helpers/usersDb");
 const users = require("../routes/user-endpoints");
 const auths = require("../routes/oauth/authenticate");
@@ -10,18 +9,15 @@ const books = require("../routes/books-endpoints");
 const stripeRouting = require("../routes/stripe/striperoutes");
 
 // TWILIo //
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var path = require("path");
+var logger = require("morgan");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
 
-
-var home = require('./routes/home');
-var token = require('./routes/token');
+var home = require("./routes/home");
+var token = require("./routes/token");
 
 // TWILIO //
-
-
 
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -84,23 +80,21 @@ server.get("/users", (req, res) => {
   res.send("users page here");
 });
 
-<<<<<<< HEAD
-=======
 //TWILIO//
 // server.set('views', path.join(__dirname, 'views'));
 // server.set('view engine', 'jade');
-server.use(logger('dev'));
+server.use(logger("dev"));
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({extended: false}));
+server.use(bodyParser.urlencoded({ extended: false }));
 // server.use(cookieParser());
 // server.use(express.static(path.join(__dirname, 'public')));
 
-server.use('/', home);
-server.use('/token', token);
+server.use("/", home);
+server.use("/token", token);
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -109,12 +103,12 @@ server.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (server.get('env') === 'development') {
+if (server.get("env") === "development") {
   server.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render("error", {
       message: err.message,
-      error: err,
+      error: err
     });
   });
 }
@@ -123,13 +117,10 @@ if (server.get('env') === 'development') {
 // no stacktraces leaked to user
 server.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.render("error", {
     message: err.message,
-    error: {},
+    error: {}
   });
 });
 
-
-
->>>>>>> 0f967776d9788f57dbd16aa3343623e9f1830a6c
 module.exports = server;
