@@ -7,7 +7,6 @@ const request = require("request-promise");
 const { parseString } = require("xml2js");
 
 router.get("/search", (req, res) => {
-  console.log(req);
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${
@@ -23,11 +22,14 @@ router.get("/search", (req, res) => {
               title: work.best_book[0].title[0],
               authors: work.best_book[0].author[0].name[0],
               covers: [work.best_book[0].image_url[0]]
+              // isbn: work.best_book[0].i
             })
           )
         })
       )
     );
 });
+
+// route to add a book to personal library so that one can lend it out will be in user-endpoints.js
 
 module.exports = router;
