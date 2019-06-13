@@ -38,7 +38,7 @@ router.post("/auth", async (req, res) => {
           userId:xuser.userId,
           password:xuser.password
         }
-        res.status(200).json(xuser);
+        res.status(200).json(udata);
         return;
         }catch (error){
             res.status(500).json({
