@@ -1,27 +1,20 @@
+//api imports
 const express = require("express");
 const server = express();
+//db imports
 const userDB = require("../DATA/helpers/usersDb");
+//route imports
 const users = require("../routes/user-endpoints");
 const auths = require("../routes/oauth/authenticate");
 const goodreadsRoutes = require("../routes/goodreads");
 const trans = require("../routes/transaction-endpoints");
 const books = require("../routes/books-endpoints");
 const stripeRouting = require("../routes/stripe/striperoutes");
-
-// TWILIo //
-var path = require("path");
-var logger = require("morgan");
-var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
-
-var home = require("./routes/home");
-var token = require("./routes/token");
-
-// TWILIO //
-
+//middleware imports
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+//end imports
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -78,49 +71,6 @@ server.get("/books", (req, res) => {
 
 server.get("/users", (req, res) => {
   res.send("users page here");
-});
-
-//TWILIO//
-// server.set('views', path.join(__dirname, 'views'));
-// server.set('view engine', 'jade');
-server.use(logger("dev"));
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: false }));
-// server.use(cookieParser());
-// server.use(express.static(path.join(__dirname, 'public')));
-
-server.use("/", home);
-server.use("/token", token);
-
-// catch 404 and forward to error handler
-server.use(function(req, res, next) {
-  var err = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (server.get("env") === "development") {
-  server.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render("error", {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-server.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render("error", {
-    message: err.message,
-    error: {}
-  });
 });
 
 module.exports = server;
