@@ -4,11 +4,11 @@ const userDB = require("../DATA/helpers/usersDb");
 const users = require("../routes/user-endpoints");
 const auths = require("../routes/oauth/authenticate");
 const goodreadsRoutes = require("../routes/goodreads");
-const trans = require("../routes/transaction-endpoints")
+
 const books = require("../routes/books-endpoints")
 
 const stripeRouting = require("../routes/stripe/striperoutes");
-
+const trans = require("../routes/transaction-endpoints")
 
 const helmet = require("helmet");
 const morgan = require("morgan");

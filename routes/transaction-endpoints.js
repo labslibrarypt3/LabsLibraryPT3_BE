@@ -2,21 +2,26 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DATA/helpers/transactionDB');
 // list of transactions by lender
-router.get('/', async (req, res) => {
-  try {
-    const tran = await db.get();
-    res.status(200).json(tran);
-  } catch (error) { 
-    console.log(error);
-    res.status(500).json({
-      message: 'Error retrieving the transactions',
-    });
-  }
-})
+// router.get('/', async (req, res) => {
+//   try {
+//     const tran = await db.get();
+//     res.status(200).json(tran);
+//   } catch (error) { 
+//     console.log(error);
+//     res.status(500).json({
+//       message: 'Error retrieving the transactions',
+//     });
+//   }
+// })
 
 router.get('/borrow', async (req, res) => {
+  const enter = req.query
     try {
-      const tran = await db.getByBorroworId(req.body);
+      const tran = await db.getByBorroworId(enter);
+      console.log(req,'trans borrow req.params')
+      const obj = {
+        "borrower_id":tran
+      }
       res.status(200).json(tran);
     } catch (error) { 
       console.log(error);
