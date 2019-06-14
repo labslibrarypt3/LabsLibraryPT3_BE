@@ -1,5 +1,6 @@
 //this verifies the oauth access token
 
+
   
   // axios.get(`url`,
   //{headers: { authorization: token }} <- pass in this object for every axios call as the second argument
@@ -26,3 +27,4 @@
 }
   }
   module.exports = restricted
+

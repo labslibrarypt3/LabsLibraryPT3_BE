@@ -1,27 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../DATA/helpers/usersDb");
-require('dotenv').config();
-
-
-
+require("dotenv").config();
 
 router.post("/auth", async (req, res) => {
-
   let user = req.body;
-  
-  
 
   const xuser = await db.getByEmail(user.email);
-  if (xuser.email !== user.email){
-    
+  if (xuser.email !== user.email) {
     const huser = {
-        name: user.name,
-        email: user.email,
-        password: user.token
-       
-        }
+      name: user.name,
+      email: user.email,
+      password: user.token
+    };
     try {
+
             const userO  = await db.insert(huser);
             res.status(200)
             .json(huser)
@@ -47,7 +40,8 @@ router.post("/auth", async (req, res) => {
             })
  
   }
+
   }
-})
+});
 
 module.exports = router;
