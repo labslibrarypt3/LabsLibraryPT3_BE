@@ -1,22 +1,19 @@
 const express = require("express");
 const db = require("../DATA/dbConfig");
 const router = express.Router();
-// const restricted = require("../middleware/restricted");
-
+const restricted = require("../middleware/restricted")
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
-//continue with tutorial that's helping me with jwt
-// https://youtu.be/7nafaH9SddU?t=1050
-
-router.get("/search", (req, res) => {
-  jwt.verify(req.token, "secretkey", (err, userData) => {
-    request
-      .get(
-        `https://www.goodreads.com/search/index.xml?key=${
-          process.env.GOODREADS_KEY
-        }&q=${req.query.q}`
-      )
+router.get("/search",(req, res) => {
+  
+  request
+    .get(
+      `https://www.goodreads.com/search/index.xml?key=${
+        process.env.GOODREADS_KEY
+      }&q=${req.query.q}`
+    )
+    
       .then(result =>
         parseString(result, (err, goodreadsResult) =>
           res.json({
