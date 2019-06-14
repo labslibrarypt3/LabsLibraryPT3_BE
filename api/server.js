@@ -8,7 +8,10 @@ const goodreadsRoutes = require("../routes/goodreads");
 const books = require("../routes/books-endpoints")
 
 const stripeRouting = require("../routes/stripe/striperoutes");
+<<<<<<< HEAD
 const trans = require("../routes/transaction-endpoints")
+=======
+>>>>>>> 020468558a653b49806d162dbe4a56bb9b6843e1
 
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -71,6 +74,5 @@ server.get("/books", (req, res) => {
 server.get("/users", (req, res) => {
   res.send("users page here");
 });
-
 
 module.exports = server;
