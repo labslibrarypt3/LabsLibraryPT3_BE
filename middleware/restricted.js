@@ -16,3 +16,5 @@ function restricted(req, res, next) {
     res.sendStatus(403).json({ error: "forbidden" });
   }
 }
+
+// implement passport.js verification method
