@@ -6,17 +6,13 @@ const server = express();
 const userDB = require("../DATA/helpers/usersDb");
 //route imports
 const users = require("../routes/user-endpoints");
-const auths = require("../routes/oauth/authenticate")
+const auths = require("../routes/oauth/authenticate");
 const goodreadsRoutes = require("../routes/goodreads");
-
-
-
-
-
 const trans = require("../routes/transaction-endpoints");
 const books = require("../routes/books-endpoints");
 const stripeRouting = require("../routes/stripe/striperoutes");
 //middleware import
+const restricted = require("../middleware/restricted");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -61,7 +57,5 @@ server.use("/api/striperoutes", stripeRouting);
 server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
-
-
 
 module.exports = server;
