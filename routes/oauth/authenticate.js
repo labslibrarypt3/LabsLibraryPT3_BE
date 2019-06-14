@@ -23,7 +23,8 @@ router.post("/auth", async (req, res) => {
         }
     try {
             const userO  = await db.insert(huser);
-            res.status(200).json(huser);
+            res.status(200)
+            .json(huser)
             return;
             }catch (error){
                 res.status(500).json({
@@ -36,7 +37,7 @@ router.post("/auth", async (req, res) => {
         console.log(xuser)
         const udata = {
           userId:xuser.userId,
-          password:xuser.password
+          password:user.password
         }
         res.status(200).json(udata);
         return;

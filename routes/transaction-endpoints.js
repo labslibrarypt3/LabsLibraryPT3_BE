@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../DATA/helpers/transactionDB');
+const restricted = require('../middleware/restricted')
 // list of transactions by lender
 // router.get('/', async (req, res) => {
 //   try {
@@ -15,7 +16,9 @@ const db = require('../DATA/helpers/transactionDB');
 // })
 
 router.get('/borrow', async (req, res) => {
+
   const enter = req.query
+  restricted(req.query)
     try {
       const tran = await db.getByBorroworId(enter);
       console.log(req,'trans borrow req.params')

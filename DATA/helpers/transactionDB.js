@@ -12,9 +12,10 @@ function get() {
   return db('User_Book');
 }
 
-function getByBorroworId(userId) {
+function getByBorroworId(id) {
+  console.log(id, 'borrowbyid in helper ')
   return db('User_Book')
-    .where(userId) 
+    .where(id,"borrower_id") 
 }
 function getByLenderId(lender_id) {
     return db('User_Book')
