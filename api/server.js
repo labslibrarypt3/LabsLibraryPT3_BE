@@ -16,6 +16,7 @@ const restricted = require("../middleware/restricted");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+const restricted = require("../middleware/restricted");
 //end imports
 
 server.use(function(req, res, next) {
@@ -45,7 +46,7 @@ server.use(
     AccessControlAllowHeaders: "Authorization"
   })
 );
-server.use(restricted);
+
 server.use("/api/users", users);
 server.use("/auths", auths);
 server.use("/api/goodreads", goodreadsRoutes);
@@ -57,5 +58,7 @@ server.use("/api/striperoutes", stripeRouting);
 server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
+
+// server.use(restricted);
 
 module.exports = server;
