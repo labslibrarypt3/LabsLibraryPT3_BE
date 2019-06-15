@@ -5,19 +5,20 @@ require("dotenv").config();
 
 router.post("/auth", async (req, res) => {
   let user = req.body;
-
-  const xuser = await db.getByEmail(user.email);
-  if (xuser.email !== user.email) {
-    const huser = {
+console.log (user,'authenticate at user assign')
+  // const xuser = await db.getByEmail(user.email);
+  // console.log(xuser,'user exist?')
+  if (!await db.getByEmail(user.email)) {
+    const newUser = {
       name: user.name,
       email: user.email,
       password: user.token
     };
     try {
 
-            const userO  = await db.insert(huser);
+            const userO  = await db.insert(newUser);
             res.status(200)
-            .json(huser)
+            .json(newUser)
             return;
             }catch (error){
                 res.status(500).json({
@@ -27,7 +28,6 @@ router.post("/auth", async (req, res) => {
 
   }}else{
     try {
-        console.log(xuser)
         const udata = {
           userId:xuser.userId,
           password:user.password
