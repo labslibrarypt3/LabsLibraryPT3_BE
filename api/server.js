@@ -12,11 +12,9 @@ const trans = require("../routes/transaction-endpoints");
 const books = require("../routes/books-endpoints");
 const stripeRouting = require("../routes/stripe/striperoutes");
 //middleware import
-const restricted = require("../middleware/restricted");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const restricted = require("../middleware/restricted");
 //end imports
 
 server.use(function(req, res, next) {
