@@ -1,12 +1,11 @@
 const express = require("express");
 const db = require("../DATA/dbConfig");
 const router = express.Router();
-const restricted = require("../middleware/restricted")
+const restricted = require("../middleware/restricted");
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
-router.get("/search",(req, res) => {
-  
+router.get("/search", (req, res) => {
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${

@@ -6,13 +6,8 @@ const server = express();
 const userDB = require("../DATA/helpers/usersDb");
 //route imports
 const users = require("../routes/user-endpoints");
-const auths = require("../routes/oauth/authenticate")
+const auths = require("../routes/oauth/authenticate");
 const goodreadsRoutes = require("../routes/goodreads");
-
-
-
-
-
 const trans = require("../routes/transaction-endpoints");
 const books = require("../routes/books-endpoints");
 const stripeRouting = require("../routes/stripe/striperoutes");
@@ -20,7 +15,6 @@ const stripeRouting = require("../routes/stripe/striperoutes");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const restricted = require ("../middleware/restricted")
 //end imports
 
 server.use(function(req, res, next) {
