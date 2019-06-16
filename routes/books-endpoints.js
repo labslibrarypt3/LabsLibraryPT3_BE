@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
   router.post('/', async (req,res) => {
-    console.log(req.body)
+    console.log(req.body, 'backend')
     const enter = req.body
       try {
         const user = await db.insert(enter);

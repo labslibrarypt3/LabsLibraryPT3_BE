@@ -29,12 +29,9 @@ function getByBorrowerId(IDs){
 }
 
 function insert(book) {
-  console.log(book)
-  return db('Books')
+  console.log(book,'book in helper function')
+  return db('Books',console.log )
     .insert(book)
-    // .then(ids => {
-    //   return getById(ids[0]);
-    // });
 }
 
 function update(id, changes) {

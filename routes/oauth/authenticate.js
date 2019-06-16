@@ -27,7 +27,8 @@ router.post("/auth", async (req, res) => {
   } else {
     try {
       const xuser = await db.getByEmail(user.email);
-      setTimeout(100);
+      console.log(xuser,'after getbyemail')
+      // setTimeout(100);
       const udata = {
         userId: xuser.userId,
         password: xuser.password
