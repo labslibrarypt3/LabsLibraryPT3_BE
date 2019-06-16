@@ -4,12 +4,11 @@
 //)
 
 const restricted = async (req, res, next) => {
-  //get auth header value
-  const authToken = req.headers.authorization;
+  console.log("Moving to a restricted route");
   try {
     //check if auth header is undefined
-    if (typeof authToken !== "undefined") {
-      req.token = authToken;
+    if (typeof req.headers.authorization !== "undefined") {
+      req.token = req.headers.authorization;
       next();
       //pass baton to next middleware
     } else {
