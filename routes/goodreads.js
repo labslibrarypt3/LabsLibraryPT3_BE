@@ -5,7 +5,7 @@ const restricted = require("../middleware/restricted");
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
-router.get("/search", restricted, (req, res) => {
+router.get("/search", (req, res) => {
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${
