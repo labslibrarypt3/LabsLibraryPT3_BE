@@ -12,10 +12,12 @@ exports.up = function(knex) {
         table.integer('ISBN')
              .notNullable()  
 
+        table.string('cover');
+
         table.bigInteger('user_id')
              .references('userId')
              .inTable('Users')
-            
+     
 });
 }
 // Book

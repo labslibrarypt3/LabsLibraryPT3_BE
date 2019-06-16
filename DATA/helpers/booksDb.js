@@ -6,6 +6,7 @@ module.exports = {
   insert,
   update,
   remove,
+  getByBorrowerId
 };
 
 function get() {
@@ -14,8 +15,17 @@ function get() {
 
 function getById(id) {
   return db('Books')
-    .where({ id })
-    .first();
+    .where( 'booksid',id )
+}
+
+// function getById(id) {
+//   return db('Books')
+//     .where(db('User_Book').where ('book_id',id)  )
+// }
+
+function getByBorrowerId(IDs){
+  // .whereIn('id', [1, 2, 3])
+  return db("Books").whereIn('bookId', IDs);
 }
 
 function insert(book) {
