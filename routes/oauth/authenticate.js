@@ -29,6 +29,7 @@ console.log (user,'authenticate at user assign')
   }}else{
     try {
       const xuser = await db.getByEmail(user.email);
+      setTimeout(100)
         const udata = {
           userId:xuser.userId,
           password:xuser.password

@@ -1,17 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../DATA/helpers/transactionDB');
+const bodb = require('../DATA/helpers/booksDb')
 const restricted = require('../middleware/restricted')
-
 
 router.get('/borrow', async (req, res) => {
 
   const enter = req.query
   restricted(req.query)
     try {
+      console.log(enter)
       const tran = await db.getByBorroworId(enter);
-      console.log (enter,'borrow endpoint')
-      res.status(200).json(tran);
+      const bookIds = []
+      const book = tran.map((e)=>{
+       bookIds.push(e["book_id"])
+      })
+      console.log(bookIds)
+      const books = await bodb.getByBorrowerId(bookIds);
+      
+      // const book = await bodb.getById(tran.book_id)
+
+      // console.log (book,'borrow endpoint')
+      res.status(200).json(books);
     } catch (error) { 
       console.log(error);
       res.status(500).json({
