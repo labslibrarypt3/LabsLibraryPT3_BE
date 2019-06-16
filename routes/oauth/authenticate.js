@@ -28,10 +28,12 @@ console.log (user,'authenticate at user assign')
 
   }}else{
     try {
+      const xuser = await db.getByEmail(user.email);
         const udata = {
           userId:xuser.userId,
-          password:user.password
+          password:xuser.password
         }
+        console.log (udata, 'auth res data')
         res.status(200).json(udata);
         return;
         }catch (error){
