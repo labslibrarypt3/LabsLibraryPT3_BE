@@ -12,7 +12,6 @@ router.get("/search", (req, res) => {
         process.env.GOODREADS_KEY
       }&q=${req.query.q}`
     )
-
     .then(result =>
       parseString(result, (err, goodreadsResult) =>
         res.json({

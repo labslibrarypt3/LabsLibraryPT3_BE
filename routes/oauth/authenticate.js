@@ -26,10 +26,13 @@ router.post("/auth", async (req, res) => {
     }
   } else {
     try {
+      const xuser = await db.getByEmail(user.email);
+      setTimeout(100);
       const udata = {
-        userId: user.userId,
-        password: user.password
+        userId: xuser.userId,
+        password: xuser.password
       };
+      console.log(udata, "auth res data");
       res.status(200).json(udata);
       return;
     } catch (error) {
