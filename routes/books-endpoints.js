@@ -29,9 +29,10 @@ router.get("/", async (req, res) => {
     });
 
 
-    
+
   router.delete('/del', async (req,res) => {
-    const target = await db.getById(req.body).del()
+    console.log ('req.body passes', req.body)
+    const target = await db.getById(req.body)
     try{
       res.status(201).json({message:'The book has been discarded'})
     }catch (error) {
