@@ -14,8 +14,9 @@ function get() {
 }
 
 function getById(id) {
+  console.log(id,"inside delete helper")
   return db('Books')
-    .where( 'booksid',id )
+    .where( id )
 }
 
 // function getById(id) {
@@ -41,8 +42,9 @@ function update(id, changes) {
 }
 
 function remove(id) {
+  console.log(id,'inside')
   return db('Books')
-    .where('id', id)
+    .where('bookId')
     .del();
 }
 

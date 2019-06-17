@@ -27,6 +27,17 @@ router.get("/", async (req, res) => {
         });
       }
     });
-  
+
+
+    
+  router.delete('/del', async (req,res) => {
+    const target = await db.getById(req.body).del()
+    try{
+      res.status(201).json({message:'The book has been discarded'})
+    }catch (error) {
+      res.status(500).json({
+        message: 'Error removing the book',
+    })
+    }})
 
 module.exports = router;
