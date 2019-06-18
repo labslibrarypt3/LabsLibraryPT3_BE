@@ -27,6 +27,8 @@ router.get("/", async (req, res) => {
         });
       }
     });
-  
+  router.delete('/', async (req,res)=>{
+    const user = await db.remove(req.body)
+  })
 
 module.exports = router;
