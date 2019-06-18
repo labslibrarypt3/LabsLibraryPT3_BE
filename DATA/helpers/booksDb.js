@@ -15,7 +15,7 @@ function get() {
 
 function getById(id) {
   return db('Books')
-    .where( 'booksid',id )
+    .where( 'bookId',id )
 }
 
 // function getById(id) {
@@ -41,8 +41,9 @@ function update(id, changes) {
 }
 
 function remove(id) {
+  console.log(id , 'in helper')
   return db('Books')
-    .where('id', id)
+    .where(id )
     .del();
 }
 
