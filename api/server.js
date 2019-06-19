@@ -6,12 +6,21 @@ const auths = require("../routes/oauth/authenticate");
 const goodreadsRoutes = require("../routes/goodreads");
 const trans = require("../routes/transaction-endpoints")
 const books = require("../routes/books-endpoints")
+const chat = require("../routes/twilio/twilioChat")
 
 const stripeRouting = require("../routes/stripe/striperoutes");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+
+const bodyParser = require('body-parser');
+const pino = require('express-pino-logger')();
+
+
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+server.use(pino);
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -48,6 +57,7 @@ server.use("/api/goodreads", goodreadsRoutes);
 server.use("/api/trans", trans);
 server.use("/api/books", books)
 server.use("/api/striperoutes", stripeRouting);
+server.use("/api/twilio", chat);
 
 
 //GET
