@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
   router.post('/', async (req,res) => {
-    console.log(req.body)
+    console.log(req.body, 'backend')
     const enter = req.body
       try {
         const user = await db.insert(enter);
@@ -27,6 +27,8 @@ router.get("/", async (req, res) => {
         });
       }
     });
-  
+  router.delete('/', async (req,res)=>{
+    const user = await db.remove(req.body)
+  })
 
 module.exports = router;
