@@ -16,8 +16,8 @@ const ejwt = require("express-jwt");
 
 router.get("/user", async (req, res) => {
   
- const enter = req.body
- console.log (req.body)
+ const enter = req.query
+ console.log (req.query,'user')
   try {
     const user = await db.getById(enter);
     res.status(200).json(user);
