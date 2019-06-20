@@ -13,7 +13,6 @@ function get() {
 }
 
 function getByBorroworId(id) {
-  console.log(id, 'borrowbyid in helper ')
   return db('User_Book')
   .where(id) 
 }
@@ -24,7 +23,4 @@ function getByLenderId(lender_id) {
 function insert(transaction) {
   return db('User_Book')
     .insert(transaction)
-    // .then(ids => {
-    //   return getById(ids[0]);
-    // });
 }
