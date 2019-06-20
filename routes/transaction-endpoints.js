@@ -18,7 +18,6 @@ router.get('/borrow', async (req, res) => {
       })
       const bookies = await bookdb.getByIdArray(bookids)
       
-      console.log (bookies,'borpoint')
       res.status(200).json(bookies);
     } catch (error) { 
       console.log(error);
@@ -39,7 +38,7 @@ router.get('/borrow', async (req, res) => {
       })
       const bookies = await bookdb.getByIdArray(bookids)
       
-      console.log (bookies,'borpoint')
+     
       res.status(200).json(bookies);
     } catch (error) { 
       console.log(error);
@@ -50,7 +49,6 @@ router.get('/borrow', async (req, res) => {
   })
   router.post('/', async (req, res) => {
     try {
-      console.log(req.body)
       const tran = await db.insert(req.body);
       res.status(200).json(req.body);
     } catch (error) { 
