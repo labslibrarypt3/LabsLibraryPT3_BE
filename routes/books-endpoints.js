@@ -13,9 +13,23 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.get("/mybooks", async (req, res) => {
+  const enter = req.query
+  console.log(enter,'weeree here')
+  try {
+    const user = await db.getById(enter);
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Error retrieving the Users"
+    });
+  }
+});
+
 
   router.post('/', async (req,res) => {
-    console.log(req.body)
+    console.log(req.body, 'backend')
     const enter = req.body
       try {
         const user = await db.insert(enter);
@@ -27,6 +41,8 @@ router.get("/", async (req, res) => {
         });
       }
     });
-  
+  router.delete('/', async (req,res)=>{
+    const user = await db.remove(req.body)
+  })
 
 module.exports = router;
