@@ -19,11 +19,7 @@ function getById(userId) {
     .first();
 
 }
-// function getByBorroworId(borrower_id) {
-//   return db('User_Book')
-//     .where(borrower_id)
-//     .first();
-// }
+
 
 function getByEmail(email){
   return db('Users')
@@ -32,12 +28,8 @@ function getByEmail(email){
 }
 
 function insert(user) {
-  console.log(user)
   return db('Users')
     .insert(user)
-    // .then(ids => {
-    //   return getById(ids[0]);
-    // });
 }
 
 function update(id, changes) {
