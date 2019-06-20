@@ -18,19 +18,12 @@ function getById(id) {
     .where( id )
 }
 
-// function getById(id) {
-//   return db('Books')
-//     .where(db('User_Book').where ('book_id',id)  )
-// }
-
 function getByIdArray(IDs){
-  // .whereIn('id', [1, 2, 3])
   return db("Books").whereIn('bookId', IDs);
 }
 
 function insert(book) {
-  console.log(book,'book in helper function')
-  return db('Books',console.log )
+  return db('Books')
     .insert(book)
 }
 
@@ -41,7 +34,6 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  console.log(id , 'in helper')
   return db('Books')
     .where(id )
     .del();
