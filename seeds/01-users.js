@@ -12,7 +12,5 @@ exports.seed = function(knex, Promise) {
     .then(function (){
       return knex('Users').insert(fakeUsers)
     })
-      // console.log(fakeUsers)
-      // return knex('Users').insert(fakeUsers  
-      // );
+  
     };

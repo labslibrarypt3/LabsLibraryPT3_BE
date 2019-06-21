@@ -5,7 +5,10 @@
             table.increments('userId');
             table.string('name').notNullable();
             table.string('email').unique().notNullable();
-            table.string('password').notNullable();       
+            table.string('img');
+            table.string('password').notNullable();
+            table.string('address');
+                   
     })
     };
     //User
