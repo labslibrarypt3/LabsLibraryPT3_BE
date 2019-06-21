@@ -15,6 +15,9 @@ exports.up = function(knex, Promise) {
         table.bigInteger('book_id')
              .references('bookId')
              .inTable('Books') 
+
+        table.timestamp('created_at')
+        .defaultTo(knex.fn.now());
         
 })
 

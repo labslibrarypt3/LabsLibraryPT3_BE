@@ -6,17 +6,21 @@ require("dotenv").config();
 router.post("/auth", async (req, res) => {
   let user = req.body;
   
+  
   if (!(await db.getByEmail(user.email))) {
     
     const newUser = {
       name: user.name,
       email: user.email,
+      img:user.img,
       password: user.token
     };
     try {
 
       const userO = await db.insert(newUser);
-      res.status(200).json(newUser);
+      const userinfo = db.getByEmail(newUser.email)
+     
+      res.status(200).json(userinfo);
       return;
 
     } catch (error) {
@@ -47,4 +51,40 @@ router.post("/auth", async (req, res) => {
   }
 });
 
+router.post("/manual", async (req, res) => {
+  let password = req.body.password
+  
+  
+  
+  if (!(await db.getByEmail(user.email))) {
+    
+    const newUser = {
+      name: user.name,
+      email: user.email,
+      password: user.token
+    };
+
+
+    try {
+
+      const userO = await db.insert(newUser);
+      res.status(200).json(newUser);
+      return;
+
+    } catch (error) {
+      res.status(500).json({
+        message: "Error registering the User try alternative registering method"
+      });
+      return;
+    }
+
+  } else {
+
+
+      res.status(500).json({message:'user already exist'});
+      return;
+
+    
+  }
+});
 module.exports = router;
