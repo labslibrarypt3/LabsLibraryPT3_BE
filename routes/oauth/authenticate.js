@@ -19,8 +19,15 @@ router.post("/auth", async (req, res) => {
 
       const userO = await db.insert(newUser);
       const userinfo = db.getByEmail(newUser.email)
+
+      const udata = {
+        userId: userinfo.userId,
+        password: userinfo.password
+      };
+
+
      
-      res.status(200).json(userinfo);
+      res.status(200).json(udata);
       return;
 
     } catch (error) {
