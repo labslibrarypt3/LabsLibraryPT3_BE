@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
+var bcrypt = require('bcryptjs');
 const db = require("../../DATA/helpers/usersDb");
+const jwt = require("jsonwebtoken")
 require("dotenv").config();
 
 router.post("/auth", async (req, res) => {
@@ -59,17 +61,23 @@ router.post("/auth", async (req, res) => {
 });
 
 router.post("/manual", async (req, res) => {
-  let password = req.body.password
   
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.password, salt);
   
+  const user = req.body
+  // console.log(user)
   
   if (!(await db.getByEmail(user.email))) {
-    
+
+    // let password = hash.hash(user.password,10)
+   
     const newUser = {
       name: user.name,
       email: user.email,
-      password: user.token
+      password: hash
     };
+    // console.log (newUser)
 
 
     try {
@@ -94,4 +102,43 @@ router.post("/manual", async (req, res) => {
     
   }
 });
+
+
+router.post("/login", async (req, res) => {
+
+  
+  const email = req.body.email
+  const password = req.body.password
+
+  const xuser = await db.getByEmail(email);
+  try {
+
+  if(email && bcrypt.compareSync(password,xuser.password)){
+
+  const token = jwt.sign({
+    email:xuser.email,
+    userId:xuser.userId
+  },process.env.JWT_SECRET, { expiresIn: 60 * 60 });
+
+  const udata = {
+    userId: xuser.userId,
+    password: token
+  }
+  console.log (udata)
+  res.status(200).json(udata);
+  return;
+} else {
+  res.status(401).json({message:'Authentication failed'})
+}
+  }
+ catch (error) {
+  res.status(500).json({
+    message: "Server error or authetication failed"
+  });
+  return;
+}
+
+  }
+
+);
 module.exports = router;
