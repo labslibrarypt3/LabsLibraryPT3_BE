@@ -6,10 +6,10 @@ const bookdb = require('../DATA/helpers/booksDb')
 
 
 
-router.get('/borrow', async (req, res) => {
+router.get('/borrow',restricted, async (req, res) => {
 
-  const enter = req.query
-  restricted(req.query)
+  const enter = req.userId
+  
     try {
       const tran = await db.getByBorroworId(enter);
       const bookids = [];
@@ -27,9 +27,9 @@ router.get('/borrow', async (req, res) => {
     }
   })
 
-  router.get('/lend',async(req, res)=>{
-    const enter = req.query
-  restricted(req.query)
+  router.get('/lend',restricted,async(req, res)=>{
+    const enter = req.userId
+  
     try {
       const tran = await db.getByLenderId(enter);
       const bookids = [];
