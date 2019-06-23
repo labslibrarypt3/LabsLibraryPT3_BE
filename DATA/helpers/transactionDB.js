@@ -14,11 +14,12 @@ function get() {
 
 function getByBorroworId(id) {
   return db('User_Book')
-  .where(id) 
+  .where('borrower_id', id )
 }
+// borrower_id
 function getByLenderId(lender_id) {
     return db('User_Book')
-      .where(lender_id)
+      .where('lender_id',lender_id)
   }
 function insert(transaction) {
   return db('User_Book')

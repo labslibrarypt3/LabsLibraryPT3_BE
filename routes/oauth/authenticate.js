@@ -7,7 +7,9 @@ require("dotenv").config();
 
 router.post("/auth", async (req, res) => {
   let user = req.body;
-  
+
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(user.token, salt);
   
   if (!(await db.getByEmail(user.email))) {
     
@@ -15,21 +17,20 @@ router.post("/auth", async (req, res) => {
       name: user.name,
       email: user.email,
       img:user.img,
-      password: user.token
+      password: hash
     };
     try {
 
       const userO = await db.insert(newUser);
       const userinfo = db.getByEmail(newUser.email)
 
-      const udata = {
-        userId: userinfo.userId,
-        password: userinfo.password
-      };
-
+      const token = jwt.sign({
+        email:userinfo.email,
+        userId:userinfo.userId
+      },process.env.JWT_SECRET, { expiresIn: 60 * 60 });
 
      
-      res.status(200).json(udata);
+      res.status(200).json(token);
       return;
 
     } catch (error) {
@@ -44,12 +45,12 @@ router.post("/auth", async (req, res) => {
     try {
       const xuser = await db.getByEmail(user.email);
 
-      const udata = {
-        userId: xuser.userId,
-        password: xuser.password
-      };
+      const token = jwt.sign({
+        email:xuser.email,
+        userId:xuser.userId
+      },process.env.JWT_SECRET, { expiresIn: 60 * 60 });
 
-      res.status(200).json(udata);
+      res.status(200).json(token);
       return;
 
     } catch (error) {
@@ -66,18 +67,18 @@ router.post("/manual", async (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, salt);
   
   const user = req.body
-  // console.log(user)
+
   
   if (!(await db.getByEmail(user.email))) {
 
-    // let password = hash.hash(user.password,10)
+    
    
     const newUser = {
       name: user.name,
       email: user.email,
       password: hash
     };
-    // console.log (newUser)
+  
 
 
     try {
@@ -124,8 +125,8 @@ router.post("/login", async (req, res) => {
     userId: xuser.userId,
     password: token
   }
-  console.log (udata)
-  res.status(200).json(udata);
+  
+  res.status(200).json(token);
   return;
 } else {
   res.status(401).json({message:'Authentication failed'})

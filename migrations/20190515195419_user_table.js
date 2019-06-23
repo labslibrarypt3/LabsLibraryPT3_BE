@@ -8,6 +8,7 @@
             table.string('img');
             table.string('password').notNullable();
             table.string('address');
+            table.integer('stripe_Id')
                    
     })
     };
