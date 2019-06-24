@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken")
 const restricted = (req, res, next) => {
   
   
-
+console.log(req.headers,'im restricted :)')
   const token =req.headers.authorization;
   
   
