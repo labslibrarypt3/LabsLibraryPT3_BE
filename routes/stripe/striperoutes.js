@@ -35,7 +35,7 @@ router.post("/account-create", restricted, async (req, res) => {
             }
           )
           .then(function(plan) {
-            res.status(200).send(plan);
+            res.send(plan);
           });
       });
   } catch (error) {
