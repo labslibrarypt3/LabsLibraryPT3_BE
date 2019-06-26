@@ -12,9 +12,10 @@
             table.string('address');
             table.string('city');
             table.string('state');
-            table.integer('zipcode')
-            table.integer('coords')
-            table.integer('stripe_Id')
+            table.string('zipcode');
+            table.string('latitude');
+            table.string('longitude');
+            table.integer('stripe_Id');
                    
     })
     };
