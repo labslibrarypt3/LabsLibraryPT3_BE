@@ -13,7 +13,7 @@ router.post("/account-create", restricted, async (req, res) => {
         type: "custom"
       })
       .then(function(acct) {
-        console.log(acct);
+        console.log(acct, 'account creation');
         // asynchronously called
 
         res.status(200).send(acct);
@@ -35,7 +35,7 @@ router.post("/account-create", restricted, async (req, res) => {
             }
           )
           .then(function(plan) {
-            res.send(plan);
+            res.status(200).send(plan);
           });
       });
   } catch (error) {
