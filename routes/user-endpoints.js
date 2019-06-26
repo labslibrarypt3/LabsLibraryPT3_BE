@@ -1,25 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../DATA/helpers/usersDb");
-const jwt = require("jsonwebtoken");
-const ejwt = require("express-jwt");
-
-// view list of users
-// router.get("/user", async(req,res)=>{
-//   try{
-    
-//   }catch{
-
-//   }
-// })
+const restricted = require("../middleware/restricted")
 
 
-router.get("/user", async (req, res) => {
-  
- const enter = req.query
+
+router.get("/user",restricted, async (req, res) => {
+ 
+  enter = req.userId
  
   try {
     const user = await db.getById(enter);
+    
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
@@ -43,25 +35,5 @@ router.post("/add", async (req, res) => {
     });
   }
 });
-
-router.get("/account", (req, res) => {
-  res.send("account page here");
-});
-
-router.get("/mybookshelf", (req, res) => {
-  res.send("mybookshelf page here");
-});
-
-router.get("/books", (req, res) => {
-  res.send("books page here");
-});
-
-router.get("/users", (req, res) => {
-  res.send("users page here");
-});
-
-
-
-
 
 module.exports = router;

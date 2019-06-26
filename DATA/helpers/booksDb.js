@@ -15,7 +15,7 @@ function get() {
 
 function getById(id) {
   return db('Books')
-    .where( id )
+    .where('user_id', id )
 }
 
 function getByIdArray(IDs){
@@ -35,7 +35,7 @@ function update(id, changes) {
 
 function remove(id) {
   return db('Books')
-    .where(id )
+  .where('bookId', id )
     .del();
 }
 

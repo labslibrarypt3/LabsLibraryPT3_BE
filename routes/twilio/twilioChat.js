@@ -38,7 +38,7 @@ router.get('/token', (req, res) => {
 });
 
 router.post('/token', (req, res) => {
-  console.log(req);
+  
   const identity = req.body.identity;
   const token = chatToken(identity, config);
   sendTokenResponse(token, res);
