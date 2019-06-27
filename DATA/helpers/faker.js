@@ -2,14 +2,17 @@ const faker = require("faker");
 
 const createFakeUser = () => ({
   name:faker.name.findName(),
-  // lastName: faker.name.lastName(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
   email: faker.internet.email(),
-
   img: faker.image.image(),
-  // phoneNumber: faker.phone.phoneNumber(0)
   password: faker.internet.password(),
-
-  address: faker.address.latitude() + faker.address.longitude()
+  address: faker.address.streetAddress(),
+  city:faker.address.city(),
+  state:faker.address.state(),
+  zipcode:faker.address.zipCode(),
+  latitude:faker.address.latitude(),
+  longitude:faker.address.longitude()
 });
 module.exports={
   createFakeUser

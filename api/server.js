@@ -17,6 +17,7 @@ const stripeRouting = require("../routes/stripe/striperoutes");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+const restricted = require("../middleware/restricted")
 //end imports
 
 const bodyParser = require("body-parser");
@@ -63,10 +64,14 @@ server.use("/api/books", books);
 server.use("/api/stripe", stripeRouting);
 server.use("/api/twilio", chat);
 
+server.get('/checkToken', restricted, function(req, res){
+res.sendStatus(200);
+})
+
 server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
 
-// server.use(restricted);
+server.use(restricted);
 
 module.exports = server;
