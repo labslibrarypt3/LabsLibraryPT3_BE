@@ -4,7 +4,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const request = require("request-promise");
 const queryString = require("query-string");
 // const restricted = require("../../middleware/restricted");
-router.use(require("body-parser").text());
+// router.use(require("body-parser").text());
 
 router.get("/connect", (req, response) => {
   const stripeData = {
@@ -18,13 +18,7 @@ router.get("/connect", (req, response) => {
 
   request
     .get(stripeData)
-    .then(
-      secondRes =>
-        secondRes.redirect(
-          `${stripeData.uri}?${queryString.stringify(stripeData.qs)}`
-        ),
-      console.log("redirecting")
-    )
+    .then(secondRes => response.send(secondRes))
     .catch(err => console.log(err));
 });
 
