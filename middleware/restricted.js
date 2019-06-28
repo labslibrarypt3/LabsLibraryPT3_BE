@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken")
 //)
 
 const restricted = function (req, res, next){ 
-console.log('im restricted :)')
   const token =req.headers.authorization
   // const token =
   // req.body.authorization ||
@@ -22,10 +21,8 @@ console.log('im restricted :)')
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       
       if(err){
-        console.log( ' 2nd 401 :(')
         res.status(401).send('Unauthorized: Invalid token')
       }else{
-        console.log('verified')
       req.email = decoded.email;
       req.userId = decoded.userId;
       
