@@ -3,6 +3,15 @@ const router = express.Router();
 const db = require("../DATA/helpers/usersDb");
 const restricted = require("../middleware/restricted")
 
+router.get("/", async (req,res) =>{
+  try{
+    const users = await db.get()
+    res.status(200).json(users)
+  }catch(err){
+  res.status(500).json('server error')
+  }
+})
+
 router.get("/user",restricted, async (req, res) => {
  
   enter = req.userId
