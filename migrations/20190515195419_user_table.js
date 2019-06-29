@@ -15,15 +15,11 @@
             table.string('zipcode');
             table.string('latitude');
             table.string('longitude');
-            table.integer('stripe_Id');
+            table.integer('stripe_user_id');
                    
     })
     };
-    //User
-// - id
-// - Library
-// - lent
-// - Borrowing
+
     exports.down = function(knex) {
         return knex.schema.dropTableIfExists('Users');
     };

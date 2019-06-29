@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const config = require('./config');
 const { chatToken, videoToken } = require('./tokens');
-const pino = require("express-pino-logger")();
+// const pino = require("express-pino-logger")();
 const bodyParser = require("body-parser");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
-router.use(pino);
+// router.use(pino);
 
 const sendTokenResponse = (token, res) => {
   res.set('Content-Type', 'application/json');
