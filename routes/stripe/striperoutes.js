@@ -16,7 +16,7 @@ router.get("/connect", (req, response) => {
   };
 
   request
-    .get(stripeData)
+    .get(stripeData,console.log(stripeData,'1st req stripedata'))
     .then(secondRes => response.send(secondRes))
     .catch(err => console.log(err));
 });

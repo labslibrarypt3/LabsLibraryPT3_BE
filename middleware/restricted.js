@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken")
 
 const restricted = function (req, res, next){ 
   const token =req.headers.authorization
+  console.log(token)
   // const token =
   // req.body.authorization ||
   // req.query.authorization ||
