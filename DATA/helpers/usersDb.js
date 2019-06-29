@@ -13,29 +13,29 @@ function get() {
   return db('Users');
 }
 
-function getById(id) {
+function getById(userId) {
+ 
   return db('Users')
-    .where({ id })
+    .where({userId})
     .first();
+
 }
+
+
 function getByEmail(email){
   return db('Users')
-    .where([{"email":email}] )
-    
+  .where("email",email)
+  .first()   
 }
 
 function insert(user) {
-  console.log(user)
   return db('Users')
     .insert(user)
-    // .then(ids => {
-    //   return getById(ids[0]);
-    // });
 }
 
 function update(id, changes) {
   return db('Users')
-    .where({ id })
+    .where({ userId})
     .update(changes);
 }
 

@@ -1,13 +1,11 @@
 const express = require("express");
 const db = require("../DATA/dbConfig");
 const router = express.Router();
-// add goodreadsBooksModel
-
+const restricted = require("../middleware/restricted");
 const request = require("request-promise");
 const { parseString } = require("xml2js");
 
 router.get("/search", (req, res) => {
-  console.log(req);
   request
     .get(
       `https://www.goodreads.com/search/index.xml?key=${
@@ -29,5 +27,7 @@ router.get("/search", (req, res) => {
       )
     );
 });
+
+// route to add a book to personal library is in user-endpoints.js
 
 module.exports = router;
