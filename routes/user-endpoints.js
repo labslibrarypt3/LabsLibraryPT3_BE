@@ -20,8 +20,10 @@ router.get("/user",restricted, async (req, res) => {
 });
 
 router.put("/update", restricted, async (req, res) =>{
-  id = req.userid
+  console.log (req.userId)
+  id = req.userId
   changes = req.body
+  console.log (id,changes)
   try{
     await db.update(id,changes)
     res.status(200).json(changes)
