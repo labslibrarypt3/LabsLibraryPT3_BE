@@ -60,5 +60,10 @@ router.post("/add", async (req, res) => {
     });
   }
 });
-
+router.delete("/", async (req, res) =>{
+const id =req.body
+const del= await db.remove(id);
+res.status(200).json(id)
+}
+)
 module.exports = router;
