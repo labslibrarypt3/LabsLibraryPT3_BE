@@ -41,7 +41,7 @@ function update(id, changes) {
 
 function remove(id) {
   return db('Users')
-    .where('id', id)
+    .where('userId', id)
     .del();
 }
 
