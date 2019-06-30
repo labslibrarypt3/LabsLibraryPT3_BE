@@ -9,8 +9,6 @@ const nodemailer = require("nodemailer");
 
 router.post("/auth", async (req, res) => {
   let user = req.body;
-  console.log(user, "user");
-
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(user.token, salt);
 
@@ -21,7 +19,6 @@ router.post("/auth", async (req, res) => {
       img: user.img,
       password: hash
     };
-    console.log(newUser, "newUser");
     try {
       const userO = await db.insert(newUser);
       const userinfo = db.getByEmail(newUser.email);
@@ -131,16 +128,17 @@ router.post("/forgot-password", (req, res) => {});
 
 //change password
 router.post("/password", async (req, res) => {
-  console.log(req.body);
   const newPass = req.body.newPassword;
   const password = req.body.password;
   const email = req.body.email;
   const xuser = await db.getByEmail(email);
   // const oldhash = bcrypt.hashSync(password)
   const hashed = bcrypt.hashSync(newPass);
-  // console.log(xuser)
-  // console.log (password,'existingpassword',xuser.password,'password in db')
-  // console.log((bcrypt.compareSync(password,xuser.password)))
+  //get password from frontend request
+  //get password from backend database
+  //compare by bcrypt.compareSync(password,xuser.password)
+  // if they match then hash password from front end
+  // submit hashed password to database
   try {
     if (bcrypt.compareSync(password, xuser.password)) {
       const obj = {
@@ -160,10 +158,5 @@ router.post("/password", async (req, res) => {
     });
   }
 });
-//get password from frontend request
-//get password from backend database
-//compare by bcrypt.compareSync(password,xuser.password)
-// if they match then hash password from front end
-// submit hashed password to database
 
 module.exports = router;
