@@ -35,13 +35,13 @@ function insert(user) {
 
 function update(id, changes) {
   return db('Users')
-    .where({ userId})
+    .where({userId:id})
     .update(changes);
 }
 
 function remove(id) {
   return db('Users')
-    .where('id', id)
+    .where('userId', id)
     .del();
 }
 

@@ -27,12 +27,9 @@ router.post("/auth", async (req, res) => {
       const userinfo = db.getByEmail(newUser.email);
 
       const token = jwt.sign(
-        {
-          email: userinfo.email,
-          userId: userinfo.userId
-        },
+        { email: userinfo.email, userId: userinfo.userId },
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 }
+        { expiresIn: 60 * 240 }
       );
 
       res.status(200).json(token);
@@ -46,17 +43,15 @@ router.post("/auth", async (req, res) => {
   } else {
     try {
       const xuser = await db.getByEmail(user.email);
-      console.log(user, "in the else");
+
       const token = jwt.sign(
         {
           email: xuser.email,
           userId: xuser.userId
         },
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 }
+        { expiresIn: 60 * 240 }
       );
-      console.log(token, "token");
-      console.log(xuser, "on the db");
 
       res.status(200).json(token);
       return;
@@ -133,5 +128,42 @@ router.post("/login", async (req, res) => {
 
 //forgot password
 router.post("/forgot-password", (req, res) => {});
+
+//change password
+router.post("/password", async (req, res) => {
+  console.log(req.body);
+  const newPass = req.body.newPassword;
+  const password = req.body.password;
+  const email = req.body.email;
+  const xuser = await db.getByEmail(email);
+  // const oldhash = bcrypt.hashSync(password)
+  const hashed = bcrypt.hashSync(newPass);
+  // console.log(xuser)
+  // console.log (password,'existingpassword',xuser.password,'password in db')
+  // console.log((bcrypt.compareSync(password,xuser.password)))
+  try {
+    if (bcrypt.compareSync(password, xuser.password)) {
+      const obj = {
+        password: hashed
+      };
+      const updated = await db.update(xuser.userId, obj);
+      res
+        .status(200)
+        .json({ message: "password has been sucessfully updated" });
+    } else {
+      res.status(400).json({ message: "Could not validate password" });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error or authetication failed"
+    });
+  }
+});
+//get password from frontend request
+//get password from backend database
+//compare by bcrypt.compareSync(password,xuser.password)
+// if they match then hash password from front end
+// submit hashed password to database
 
 module.exports = router;
