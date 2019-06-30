@@ -15,14 +15,14 @@ const restricted = function (req, res, next){
   // req.cookies.authorization;
   
     if(!token){
-     
-      res.status(401).send('Unauthorized: no token provided');
+      
+      res.status(401).send(path.resolve('http://localhost:4000/'));
   }else{
    
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       
       if(err){
-        res.status(401).send('Unauthorized: Invalid token')
+        res.status(401).redirect('http://localhost:3000/');
       }else{
       req.email = decoded.email;
       req.userId = decoded.userId;
