@@ -21,11 +21,9 @@ const restricted = require("../middleware/restricted");
 //end imports
 
 const bodyParser = require("body-parser");
-// const pino = require('express-pino-logger')();
 
 server.use(bodyParser.urlencoded({ extended: false }));
 // server.use(bodyParser.json());
-// server.use(pino);
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

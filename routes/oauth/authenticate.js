@@ -4,6 +4,8 @@ var bcrypt = require("bcryptjs");
 const db = require("../../DATA/helpers/usersDb");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
 router.post("/auth", async (req, res) => {
   let user = req.body;
@@ -128,4 +130,8 @@ router.post("/login", async (req, res) => {
     return;
   }
 });
+
+//forgot password
+router.post("/forgot-password", (req, res) => {});
+
 module.exports = router;
