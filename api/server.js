@@ -17,15 +17,13 @@ const stripeRouting = require("../routes/stripe/striperoutes");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const restricted = require("../middleware/restricted")
+const restricted = require("../middleware/restricted");
 //end imports
 
 const bodyParser = require("body-parser");
-// const pino = require('express-pino-logger')();
 
 server.use(bodyParser.urlencoded({ extended: false }));
-server.use(bodyParser.json());
-// server.use(pino);
+// server.use(bodyParser.json());
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -64,9 +62,9 @@ server.use("/api/books", books);
 server.use("/api/stripe", stripeRouting);
 server.use("/api/twilio", chat);
 
-server.get('/checkToken', restricted, function(req, res){
-res.sendStatus(200);
-})
+server.get("/checkToken", restricted, function(req, res) {
+  res.sendStatus(200);
+});
 
 server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");

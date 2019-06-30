@@ -1,54 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../DATA/helpers/usersDb");
-const restricted = require("../middleware/restricted")
+const restricted = require("../middleware/restricted");
 
-router.get("/", async (req,res) =>{
-  try{
-    const users = await db.get()
-    res.status(200).json(users)
-  }catch(err){
-  res.status(500).json('server error')
-  }
-})
-
-router.get("/user",restricted, async (req, res) => {
- 
-  enter = req.userId
- 
+router.get("/user", restricted, async (req, res) => {
+  id = req.userId;
   try {
-    const user = await db.getById(enter);
-    
+    const user = await db.getById(id);
     res.status(200).json(user);
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: "Error retrieving the Users"
     });
   }
 });
-
-router.put("/update", restricted, async (req, res) =>{
-  console.log (req.userId)
-  id = req.userId
-  changes = req.body
-  console.log (id,changes)
-  try{
-    await db.update(id,changes)
-    res.status(200).json(changes)
-
-  }catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "Error retrieving the Users"
-    });
-  }
-});
-
 
 // Add a user with post
 router.post("/add", async (req, res) => {
-  
   const enter = req.body;
   try {
     const user = await db.insert(enter);
@@ -60,10 +28,5 @@ router.post("/add", async (req, res) => {
     });
   }
 });
-router.delete("/", async (req, res) =>{
-const id =req.body
-const del= await db.remove(id);
-res.status(200).json(id)
-}
-)
+
 module.exports = router;
