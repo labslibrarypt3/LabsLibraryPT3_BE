@@ -18,7 +18,13 @@ router.get("/connect", (req, response) => {
   request
     .get(stripeData)
     .then(secondRes => response.send(secondRes))
-    .catch(err => res.status(500).json({"Error: Unable to connect to Stripe at this time. Please try again later."}));
+    .catch(err =>
+      res
+        .status(500)
+        .json(
+          "Error: Unable to connect to Stripe at this time. Please try again later."
+        )
+    );
 });
 
 module.exports = router;
