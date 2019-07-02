@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const request = require("request-promise");
-// const queryString = require("query-string");
 // const restricted = require("../../middleware/restricted");
 
 router.get("/connect", (req, response) => {
@@ -18,7 +17,13 @@ router.get("/connect", (req, response) => {
   request
     .get(stripeData)
     .then(secondRes => response.send(secondRes))
-    .catch(err => res.status(500).json({"Error: Unable to connect to Stripe at this time. Please try again later."}));
+    .catch(err =>
+      res
+        .status(500)
+        .json(
+          "Error: Unable to connect to Stripe at this time. Please try again later."
+        )
+    );
 });
 
 module.exports = router;
