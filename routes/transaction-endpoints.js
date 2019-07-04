@@ -97,12 +97,13 @@ router.post("/", async (req, res) => {
 });
 
 // updates an existing transaction messageArray in the database
-router.put("/update", async (req, res) => {
+router.post("/update", async (req, res) => {
   try {
-    const messages = req.body.messages;
+    const entree = { messages: req.body.messages };
     const id = req.body.book_id;
-    console.log(req.body, "endpoint");
-    const updates = await db.update(id, messages);
+    console.log(entree, "endpoint");
+
+    const updates = await db.update(id, entree);
 
     res.status(200).json(req.body);
   } catch (error) {
