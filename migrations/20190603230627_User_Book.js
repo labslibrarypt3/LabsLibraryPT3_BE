@@ -20,7 +20,7 @@ exports.up = function(knex, Promise) {
       .inTable("Books");
 
     table.timestamp("created_at").defaultTo(knex.fn.now());
-    table.specificType("messageArray", "text ARRAY");
+    table.string("messages");
     table.boolean("is_checked_out").defaultTo(false);
   });
 };
