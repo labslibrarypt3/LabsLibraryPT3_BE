@@ -26,7 +26,7 @@ router.post("/auth", async (req, res) => {
       const token = jwt.sign(
         { email: userinfo.email, userId: userinfo.userId },
         process.env.JWT_SECRET,
-        { expiresIn: 60 }
+        { expiresIn: 60 * 240 }
       );
 
       res.status(200).json(token);
@@ -47,7 +47,7 @@ router.post("/auth", async (req, res) => {
           userId: xuser.userId
         },
         process.env.JWT_SECRET,
-        { expiresIn: 60 }
+        { expiresIn: 60 * 240 }
       );
 
       res.status(200).json(token);
@@ -102,7 +102,7 @@ router.post("/login", async (req, res) => {
           userId: xuser.userId
         },
         process.env.JWT_SECRET,
-        { expiresIn: 60 }
+        { expiresIn: 60 * 240 }
       );
 
       const udata = {
