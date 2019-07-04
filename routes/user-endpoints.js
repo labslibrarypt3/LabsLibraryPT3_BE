@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/user", restricted, async (req, res) => {
+  console.log("user-endpoints GET begin");
   id = req.userId;
   try {
     const user = await db.getById(id);
@@ -18,6 +19,7 @@ router.get("/user", restricted, async (req, res) => {
       message: "Error retrieving the Users"
     });
   }
+  console.log("user-endpoints GET end");
 });
 
 // Add a user with post
