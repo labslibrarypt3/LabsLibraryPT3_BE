@@ -4,6 +4,38 @@ const db = require("../DATA/helpers/transactionDB");
 const restricted = require("../middleware/restricted");
 const bookdb = require("../DATA/helpers/booksDb");
 
+// retrieves transactions by borrower id
+
+router.get("/tranborrow", restricted, async (req, res) => {
+  const enter = req.userId;
+  try {
+    const tran = await db.getByBorroworId(enter);
+
+    res.status(200).json(tran);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving the transactions"
+    });
+  }
+});
+
+// retrieves transactions by lender id
+
+router.get("/tranlent", restricted, async (req, res) => {
+  const enter = req.userId;
+
+  try {
+    const tran = await db.getByLenderId(enter);
+
+    res.status(200).json(tran);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving the transactions"
+    });
+  }
+});
+
+// retrieves books by borrower id
 router.get("/borrow", restricted, async (req, res) => {
   const enter = req.userId;
 
@@ -23,6 +55,7 @@ router.get("/borrow", restricted, async (req, res) => {
   }
 });
 
+// retrieves books by lender id
 router.get("/lend", restricted, async (req, res) => {
   const enter = req.userId;
 
@@ -41,6 +74,8 @@ router.get("/lend", restricted, async (req, res) => {
     });
   }
 });
+
+// creates a new transaction in the database
 router.post("/", async (req, res) => {
   try {
     const tran = await db.insert(req.body);
@@ -49,6 +84,23 @@ router.post("/", async (req, res) => {
     res.status(500).json({
       message: "Error retrieving the Users"
     });
+  }
+});
+
+// updates an existing transaction messageArray in the database
+router.put("/update", async (req, res) => {
+  try {
+    console.log(req.body, "endpoint");
+    const updates = await db.update(req.body);
+
+    res.status(200).json(req.body);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Error retrieving the Users"
+      })
+      .send(console.log(error));
   }
 });
 
