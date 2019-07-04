@@ -3,6 +3,11 @@ const router = express.Router();
 const db = require("../DATA/helpers/usersDb");
 const restricted = require("../middleware/restricted");
 
+router.get("/", async (req, res) => {
+  const user = await db.get();
+  res.status(200).json(user);
+});
+
 router.get("/user", restricted, async (req, res) => {
   console.log("user-endpoints GET begin");
   id = req.userId;

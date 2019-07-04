@@ -4802,6 +4802,11 @@ query-string@^6.8.1:
     split-on-first "^1.0.0"
     strict-uri-encode "^2.0.0"
 
+querystring@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
+  integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+
 question-cache@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/question-cache/-/question-cache-0.4.0.tgz#e2b9937fc5fb7dc60fbb9f105f1fa254b33dea7d"

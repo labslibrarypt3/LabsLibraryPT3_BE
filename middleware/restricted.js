@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const restricted = function(req, res, next) {
   const token = req.headers.authorization;
+  console.log(token, "your token");
   if (!token) {
     res.status(401);
   } else {
@@ -16,7 +17,7 @@ const restricted = function(req, res, next) {
       } else {
         req.email = decoded.email;
         req.userId = decoded.userId;
-
+        console.log(req.userId);
         next();
       }
     });
