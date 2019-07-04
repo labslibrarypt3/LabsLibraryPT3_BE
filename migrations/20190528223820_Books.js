@@ -1,31 +1,25 @@
-
 exports.up = function(knex) {
-    return knex.schema.createTable('Books', table => {
-        table.increments('bookId');
-        
-        table.string('title')
-             .notNullable();
+  return knex.schema.createTable("Books", table => {
+    table.increments("bookId");
 
-        table.string('authors')
-             .notNullable();
+    table.string("title").notNullable();
 
-        table.integer('ISBN')
-             .notNullable()  
+    table.string("authors").notNullable();
 
-        table.string('cover');
+    table.string("cover");
 
-        table.bigInteger('user_id')
-             .references('userId')
-             .inTable('Users')
-     
-});
-}
+    table
+      .bigInteger("user_id")
+      .references("userId")
+      .inTable("Users");
+  });
+};
 // Book
 // - id
 // - title
 // - authors
 // - ISBN
 
-    exports.down = function(knex) {
-        return knex.schema.dropTableIfExists('Books');
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists("Books");
 };
