@@ -22,10 +22,11 @@ function getByLenderId(lender_id) {
 function insert(transaction) {
   return db("User_Book").insert(transaction);
 }
-function update(id, entree) {
-  // console.log(messages, "in trans update helper");
-  db("User_Book")
-    .where("book_id", id)
-    .insert("messages", entree.messages);
-  return;
+function update(entree) {
+  messages = entree.messages;
+  id = entree.checkoutId;
+  console.log(messages, id, "in trans update helper");
+  return db("User_Book")
+    .update("messages", messages)
+    .where("checkoutId", id);
 }
