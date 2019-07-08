@@ -1,4 +1,4 @@
-const db = require('../dbConfig.js');
+const db = require("../dbConfig.js");
 
 module.exports = {
   get,
@@ -10,33 +10,31 @@ module.exports = {
 };
 
 function get() {
-  return db('Books');
+  return db("Books");
 }
 
 function getById(id) {
-  return db('Books')
-    .where('user_id', id )
+  return db("Books").where("user_id", id);
 }
 
-function getByIdArray(IDs){
-  return db("Books").whereIn('bookId', IDs);
+function getByIdArray(IDs) {
+  return db("Books").whereIn("bookId", IDs);
 }
 
 function insert(book) {
-  return db('Books')
-    .insert(book)
+  console.log("line 25 book db", book);
+  console.log(`I am inserting ${book} into the db in the helper function`);
+  return db("Books").insert(book);
 }
 
 function update(id, changes) {
-  return db('Books')
+  return db("Books")
     .where({ id })
     .update(changes);
 }
 
 function remove(id) {
-  return db('Books')
-  .where('bookId', id )
+  return db("Books")
+    .where("bookId", id)
     .del();
 }
-
- 

@@ -1,51 +1,33 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 //this verifies the oauth access token
 // axios.get(`url`,
 //{headers: { authorization: token }} <- pass in this object for every axios call as the second argument
 //)
 
-const restricted = function (req, res, next){ 
-console.log('im restricted :)')
-  const token =req.headers.authorization
-  // const token =
-  // req.body.authorization ||
-  // req.query.authorization ||
-  // req.headers.authorization ||
-  // req.cookies.authorization;
-  
-    if(!token){
-     
-      res.status(401).send('Unauthorized: no token provided');
-  }else{
-   
+const restricted = function(req, res, next) {
+  const token = req.headers.authorization;
+  console.log(token, "your token");
+  if (!token) {
+    res.status(401);
+  } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-      
-      if(err){
-        console.log( ' 2nd 401 :(')
-        res.status(401).send('Unauthorized: Invalid token')
-      }else{
-        console.log('verified')
-      req.email = decoded.email;
-      req.userId = decoded.userId;
-      
-      next();
-    }
+      if (err) {
+        res.status(401);
+      } else {
+        req.email = decoded.email;
+        req.userId = decoded.userId;
+        console.log(req.userId);
+        next();
+      }
     });
   }
-  
-   
 
-    
-    // err?res.status(401).json({"message":"authorization denied"}):
-    
-   
-  
-  
+  // err?res.status(401).json({"message":"authorization denied"}):
+
   // res.status(500).json({message:'Server Error try relogging'})
-  
-    
-    //check if auth header is undefined
+
+  //check if auth header is undefined
   //   if (typeof req.headers.authorization !== "undefined") {
   //     req.token = req.headers.authorization;
   //     next();
