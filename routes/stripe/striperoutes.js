@@ -5,18 +5,24 @@ const request = require("request-promise");
 // const restricted = require("../../middleware/restricted");
 
 router.get("/connect", (req, response) => {
+  //this is used to authorize data back from stripe
+
   const stripeData = {
     response_type: "code",
     uri: "https://connect.stripe.com/express/oauth/authorize",
     qs: {
-      redirect_uri: "https://goofy-mayer-45bb20.netlify.com/",
-      client_id: "ca_FIasejiINwidFDyzoZ3EZ5Go8GKRfdsO"
+      redirect_uri: "http://localhost:3000/account",
+      client_id: "ca_FIasejiINwidFDyzoZ3EZ5Go8GKRfdsO",
+      state: Math.random().toString(36)
     }
   };
 
   request
     .get(stripeData)
-    .then(secondRes => response.send(secondRes))
+    .then(secondRes => {
+      console.log("I am about to redirect");
+      response.send(secondRes);
+    })
     .catch(err =>
       res
         .status(500)

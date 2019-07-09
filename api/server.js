@@ -31,7 +31,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
-    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Header",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
