@@ -87,9 +87,15 @@ router.get("/lend", restricted, async (req, res) => {
 });
 
 // creates a new transaction in the database
-router.post("/", async (req, res) => {
+router.post("/", restricted, async (req, res) => {
   try {
-    const tran = await db.insert(req.body);
+    const newTransaction = {
+      lender_id: req.body.lender_id,
+      borrower_id: req.userId,
+      book_id: req.body.book_id
+    };
+    console.log(newTransaction, req.body);
+    const tran = await db.insert(newTransaction);
     res.status(200).json(req.body);
   } catch (error) {
     res.status(500).send(console.log(error));
@@ -97,13 +103,14 @@ router.post("/", async (req, res) => {
 });
 
 // updates an existing transaction messageArray in the database
-router.post("/update", async (req, res) => {
+router.put("/update/", async (req, res) => {
   try {
-    const entree = { messages: req.body.messages };
+    console.log(req.body, "endpoint");
+    const entree = req.body;
     const id = req.body.book_id;
     console.log(entree, "endpoint");
 
-    const updates = await db.update(id, entree);
+    const updates = await db.update(entree);
 
     res.status(200).json(req.body);
   } catch (error) {

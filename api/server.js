@@ -2,6 +2,7 @@
 const express = require("express");
 // brings in express to create the application or server
 const server = express();
+
 //db imports
 const userDB = require("../DATA/helpers/usersDb");
 //route imports
@@ -21,6 +22,8 @@ const restricted = require("../middleware/restricted");
 //end imports
 
 const bodyParser = require("body-parser");
+
+// server.use(express.static(path.join(__dirname, "public")));
 
 server.use(bodyParser.urlencoded({ extended: false }));
 // server.use(bodyParser.json());
@@ -70,6 +73,6 @@ server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
 
-server.use(restricted);
+// server.use(restricted);
 
 module.exports = server;
