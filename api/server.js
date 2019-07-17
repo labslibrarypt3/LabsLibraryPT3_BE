@@ -15,6 +15,7 @@ const chat = require("../routes/twilio/twilioChat");
 
 const stripeRouting = require("../routes/stripe/striperoutes");
 //middleware import
+const nodemailer = require("nodemailer");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
