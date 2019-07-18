@@ -6,7 +6,8 @@ module.exports = {
   getByEmail,
   insert,
   update,
-  remove
+  remove,
+  getLibraries
 };
 
 function get() {
@@ -39,4 +40,8 @@ function remove(id) {
   return db("Users")
     .where("userId", id)
     .del();
+}
+
+function getLibraries() {
+  return select("latitude", "longitude", "userId").from("Users");
 }

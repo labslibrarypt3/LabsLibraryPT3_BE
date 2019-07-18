@@ -74,6 +74,6 @@ server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
 
-// server.use(restricted);
+server.use(restricted);
 
 module.exports = server;
