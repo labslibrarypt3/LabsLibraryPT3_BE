@@ -16,6 +16,7 @@ const restricted = function(req, res, next) {
   } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       if (err) {
+        console.log(err);
         res.redirect("/");
       } else {
         req.email = decoded.email;
@@ -24,6 +25,7 @@ const restricted = function(req, res, next) {
           console.log(req.userId);
           next();
         } else {
+          console.log(err);
           res.redirect("/");
         }
       }
