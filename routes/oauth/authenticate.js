@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-var bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const db = require("../../DATA/helpers/usersDb");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -123,22 +123,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//forgot password
-router.post("/forgot-password", (req, res) => {});
-
 //change password
 router.post("/password", async (req, res) => {
   const newPass = req.body.newPassword;
   const password = req.body.password;
   const email = req.body.email;
   const xuser = await db.getByEmail(email);
-  // const oldhash = bcrypt.hashSync(password)
   const hashed = bcrypt.hashSync(newPass);
-  //get password from frontend request
-  //get password from backend database
-  //compare by bcrypt.compareSync(password,xuser.password)
-  // if they match then hash password from front end
-  // submit hashed password to database
+
   try {
     if (bcrypt.compareSync(password, xuser.password)) {
       const obj = {
@@ -152,6 +144,62 @@ router.post("/password", async (req, res) => {
       res.status(400).json({ message: "Could not validate password" });
       return;
     }
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error or authetication failed"
+    });
+  }
+});
+
+//forgot password
+router.post("/forgot-password", async (req, res) => {
+  console.log(req.body, "at beggining of endpoint");
+  const email = req.body.email;
+  const xuser = await db.getByEmail(email);
+  console.log(xuser, "xuser after assign");
+  if (xuser.email === null) {
+    res.status(401).json("email not found");
+  } else {
+    const token = crypto.randomBytes(20).toString("hex");
+    const obj = {
+      password: token
+    };
+    const updated = await db.update(xuser.userId, obj);
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: `theneighborhoodlibrarycom@gmail.com`,
+        pass: `${process.env.EMAIL_PASSWORD}`
+      }
+    });
+    const mailOptions = {
+      from: "theneighborhoodlibrarycom@gmail.com",
+      to: `${email}`,
+      subject: "Password reset request",
+      text: `Here is the password reset you have requested just click the link and create a new password http://localhost:3000/reset/${token}`
+    };
+    console.log("sending mail");
+
+    transporter.sendMail(mailOptions, function(err, response) {
+      err
+        ? console.error("Problem sending the reset", err)
+        : console.log("here is the res:", response);
+      res.status(200).json("reset email sent");
+    });
+  }
+});
+//reset password
+router.post("/reset-password", async (req, res) => {
+  const newPass = req.body.newPassword;
+  const email = req.body.email;
+  const xuser = await db.getByEmail(email);
+  const hashed = bcrypt.hashSync(newPass);
+  const obj = {
+    password: hashed
+  };
+  try {
+    const updated = await db.update(xuser.userId, obj);
+    res.status(200).json({ message: "password has been sucessfully updated" });
   } catch (error) {
     res.status(500).json({
       message: "Server error or authetication failed"

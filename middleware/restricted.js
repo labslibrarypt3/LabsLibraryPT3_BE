@@ -1,3 +1,6 @@
+const express = require("express");
+const router = express.Router();
+
 const jwt = require("jsonwebtoken");
 
 //this verifies the oauth access token
@@ -8,17 +11,23 @@ const jwt = require("jsonwebtoken");
 const restricted = function(req, res, next) {
   const token = req.headers.authorization;
   console.log(token, "your token");
-  if (!token) {
-    res.status(401);
+  if (!token || token === null) {
+    res.redirect("http://localhost:3000/account");
   } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       if (err) {
-        res.status(401);
+        console.log(err);
+        res.redirect("/");
       } else {
         req.email = decoded.email;
         req.userId = decoded.userId;
-        console.log(req.userId);
-        next();
+        if (req.userId) {
+          console.log(req.userId);
+          next();
+        } else {
+          console.log(err);
+          res.redirect("/");
+        }
       }
     });
   }

@@ -43,6 +43,5 @@ function remove(id) {
 }
 
 function getLibraries() {
-  console.log("getting libs");
   return select("latitude", "longitude", "userId").from("Users");
 }

@@ -15,6 +15,7 @@ const chat = require("../routes/twilio/twilioChat");
 
 const stripeRouting = require("../routes/stripe/striperoutes");
 //middleware import
+const nodemailer = require("nodemailer");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -73,6 +74,6 @@ server.get("/", (req, res) => {
   res.send("Hello World, from Neighborhood Library Backend");
 });
 
-// server.use(restricted);
+server.use(restricted);
 
 module.exports = server;
