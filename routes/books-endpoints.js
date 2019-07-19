@@ -13,7 +13,13 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.get("/books", async (req, res) => {
+  console.log(
+    req.user_id,
 
+    "this is in  the mybooks components for a comparison"
+  );
+});
 router.get("/mybooks", restricted, async (req, res) => {
   const enter = req.userId;
 
