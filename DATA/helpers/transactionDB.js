@@ -24,9 +24,9 @@ function insert(transaction) {
 }
 function update(entree) {
   messages = entree.messages;
-  id = entree.checkoutId;
+  id = entree.bookId;
   console.log(messages, id, "in trans update helper");
   return db("User_Book")
-    .update("messages", messages)
-    .where("checkoutId", id);
+    .update("is_checked_out", messages)
+    .where("bookId", id);
 }
