@@ -34,7 +34,7 @@ router.get("/tranborrow", restricted, async (req, res) => {
 
 router.get("/tranlent", restricted, async (req, res) => {
   const enter = req.userId;
-
+  console.log(enter, "inside endpoint before try");
   try {
     const tran = await db.getByLenderId(enter);
 
@@ -69,6 +69,7 @@ router.get("/borrow", restricted, async (req, res) => {
 // retrieves books by lender id
 router.get("/lend", restricted, async (req, res) => {
   const enter = req.userId;
+  console.log(enter, " in lend endpoint");
 
   try {
     const tran = await db.getByLenderId(enter);
@@ -87,7 +88,8 @@ router.get("/lend", restricted, async (req, res) => {
 });
 
 // creates a new transaction in the database
-router.post("/", restricted, async (req, res) => {
+router.post("/", async (req, res) => {
+  console.log(req.body);
   try {
     const newTransaction = {
       lender_id: req.body.lender_id,
@@ -103,14 +105,14 @@ router.post("/", restricted, async (req, res) => {
 });
 
 // updates an existing transaction messageArray in the database
-router.put("/update/", async (req, res) => {
+router.put("/update", async (req, res) => {
   try {
     console.log(req.body, "endpoint");
     const entree = req.body;
-    const id = req.body.book_id;
+    // const id = req.body.book_id;
     console.log(entree, "endpoint");
 
-    const updates = await db.update(entree);
+    // const updates = await db.update(entree);
 
     res.status(200).json(req.body);
   } catch (error) {
