@@ -66,4 +66,18 @@ router.get("/get-libraries", async (req, res) => {
   res.status(200).json(libraries);
 });
 
+//get a list of lats and lngs and
+router.get("/get-libraries", async (req, res) => {
+  const user = await db.get();
+  const libraries = user.map(user => {
+    return {
+      latitude: user.latitude,
+      longitude: user.longitude,
+      userId: user.userId
+    };
+  });
+
+  res.status(200).json(libraries);
+});
+
 module.exports = router;
