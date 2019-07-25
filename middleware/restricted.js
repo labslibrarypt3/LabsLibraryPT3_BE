@@ -12,7 +12,7 @@ const restricted = function(req, res, next) {
   const token = req.headers.authorization;
   console.log(token, "your token");
   if (!token || token === null) {
-    res.redirect("http://localhost:3000/account");
+    res.redirect(`${baseUrl}/account`);
   } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       if (err) {
@@ -22,10 +22,8 @@ const restricted = function(req, res, next) {
         req.email = decoded.email;
         req.userId = decoded.userId;
         if (req.userId) {
-          console.log(req.userId);
           next();
         } else {
-          console.log(err);
           res.redirect("/");
         }
       }
