@@ -5,7 +5,8 @@ module.exports = {
   getByBorroworId,
   getByLenderId,
   insert,
-  update
+  update,
+  getByBookId
 };
 
 function get() {
@@ -29,4 +30,7 @@ function update(entree) {
   return db("User_Book")
     .update("is_checked_out", messages)
     .where("bookId", id);
+}
+function getByBookId(book_id) {
+  return db("User_Book").where("book_id");
 }
