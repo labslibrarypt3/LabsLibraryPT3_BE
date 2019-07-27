@@ -25,7 +25,6 @@ function insert(transaction) {
 function update(entree) {
   messages = entree.messages;
   id = entree.checkoutId;
-  console.log(messages, id, "in trans update helper");
   return db("User_Book")
     .update("messages", messages)
     .where("checkoutId", id);

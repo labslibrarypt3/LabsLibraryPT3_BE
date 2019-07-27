@@ -11,7 +11,6 @@ router.get("/connect", (req, response) => {
     response_type: "code",
     uri: "https://connect.stripe.com/express/oauth/authorize",
     qs: {
-      redirect_uri: `${baseUrl}/account`,
       client_id: "ca_FIasejiINwidFDyzoZ3EZ5Go8GKRfdsO",
       state: Math.random().toString(36)
     }

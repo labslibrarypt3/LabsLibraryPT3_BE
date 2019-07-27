@@ -8,7 +8,6 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const baseUrl = process.env.BASE_URL;
 
-
 router.post("/auth", async (req, res) => {
   let user = req.body;
   const salt = bcrypt.genSaltSync(10);
@@ -155,10 +154,8 @@ router.post("/password", async (req, res) => {
 
 //forgot password
 router.post("/forgot-password", async (req, res) => {
-  console.log(req.body, "at beggining of endpoint");
   const email = req.body.email;
   const xuser = await db.getByEmail(email);
-  console.log(xuser, "xuser after assign");
   if (xuser.email === null) {
     res.status(401).json("email not found");
   } else {
@@ -180,7 +177,6 @@ router.post("/forgot-password", async (req, res) => {
       subject: "Password reset request",
       text: `Here is the password reset you have requested just click the link and create a new password ${baseUrl}/reset/${token}`
     };
-    console.log("sending mail");
 
     transporter.sendMail(mailOptions, function(err, response) {
       err
