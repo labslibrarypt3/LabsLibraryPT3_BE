@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const baseUrl = process.env.BASE_URL;
+
 
 router.post("/auth", async (req, res) => {
   let user = req.body;
@@ -176,7 +178,7 @@ router.post("/forgot-password", async (req, res) => {
       from: "theneighborhoodlibrarycom@gmail.com",
       to: `${email}`,
       subject: "Password reset request",
-      text: `Here is the password reset you have requested just click the link and create a new password http://localhost:3000/reset/${token}`
+      text: `Here is the password reset you have requested just click the link and create a new password ${baseUrl}/reset/${token}`
     };
     console.log("sending mail");
 
