@@ -124,5 +124,20 @@ router.put("/update", async (req, res) => {
       .send(console.log(error));
   }
 });
+router.get("/book_id", async (req, res) => {
+  try {
+    console.log(req.body);
+    const tran = await db.getByBookId(req.body);
+    console.log(tran);
+    res.send(200).json(tran);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Error retrieving data from server"
+      })
+      .send(console.log(error));
+  }
+});
 
 module.exports = router;
