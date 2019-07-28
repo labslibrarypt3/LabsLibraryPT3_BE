@@ -10,13 +10,11 @@ const jwt = require("jsonwebtoken");
 
 const restricted = function(req, res, next) {
   const token = req.headers.authorization;
-  console.log(token, "your token");
   if (!token || token === null) {
     res.redirect(`${baseUrl}/account`);
   } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       if (err) {
-        console.log(err);
         res.redirect("/");
       } else {
         req.email = decoded.email;
