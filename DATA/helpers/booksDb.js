@@ -22,8 +22,6 @@ function getByIdArray(IDs) {
 }
 
 function insert(book) {
-  console.log("line 25 book db", book);
-  console.log(`I am inserting ${book} into the db in the helper function`);
   return db("Books").insert(book);
 }
 

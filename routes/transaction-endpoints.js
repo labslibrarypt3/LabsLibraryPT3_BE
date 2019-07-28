@@ -96,7 +96,6 @@ router.post("/", async (req, res) => {
       borrower_id: req.userId,
       book_id: req.body.book_id
     };
-    console.log(newTransaction, req.body);
     const tran = await db.insert(newTransaction);
     res.status(200).json(req.body);
   } catch (error) {
@@ -107,7 +106,6 @@ router.post("/", async (req, res) => {
 // updates an existing transaction messageArray in the database
 router.put("/update", async (req, res) => {
   try {
-    console.log(req.body, "endpoint");
     const entree = req.body;
     // const id = req.body.book_id;
     console.log(entree, "endpoint");
