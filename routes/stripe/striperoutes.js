@@ -7,6 +7,8 @@ const request = require("request-promise");
 router.get("/connect", (req, response) => {
   //this is used to authorize data back from stripe
 
+  const stateValue = Math.random().toString(36);
+
   const stripeUrl = `https://connect.stripe.com/express/oauth/authorize?redirect_uri=https://goofy-mayer-45bb20.netlify.com/&client_id=ca_FIasejiINwidFDyzoZ3EZ5Go8GKRfdsO&state=${stateValue}&suggested_capabilities[]=platform_payments`;
 
   request
