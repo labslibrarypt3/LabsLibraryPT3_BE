@@ -5,7 +5,8 @@ module.exports = {
   getByBorroworId,
   getByLenderId,
   insert,
-  update
+  update,
+  getByBookId
 };
 
 function get() {
@@ -24,8 +25,16 @@ function insert(transaction) {
 }
 function update(entree) {
   messages = entree.messages;
+<<<<<<< HEAD
   id = entree.checkoutId;
+=======
+  id = entree.bookId;
+  console.log(messages, id, "in trans update helper");
+>>>>>>> d45f5f5349a200da92e4faa621c83c408ea89674
   return db("User_Book")
-    .update("messages", messages)
-    .where("checkoutId", id);
+    .update("is_checked_out", messages)
+    .where("bookId", id);
+}
+function getByBookId(book_id) {
+  return db("User_Book").where("book_id");
 }
