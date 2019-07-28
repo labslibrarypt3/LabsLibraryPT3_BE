@@ -108,11 +108,11 @@ router.post("/", async (req, res) => {
 router.put("/update", async (req, res) => {
   try {
     console.log(req.body, "endpoint");
-    const entree = req.body;
+    // const entree = req.body;
     // const id = req.body.book_id;
-    console.log(entree, "endpoint");
+    // console.log(entree.is_checked_out, "endpoint");
 
-    // const updates = await db.update(entree);
+    const updates = await db.update(req.body);
 
     res.status(200).json(req.body);
   } catch (error) {
