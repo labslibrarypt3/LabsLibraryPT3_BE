@@ -35,11 +35,6 @@ router.get("/mybooks", restricted, async (req, res) => {
 });
 
 router.post("/", restricted, async (req, res) => {
-  console.log(` I am the user id on the backend ${req.userId}`);
-
-  console.log(`I am the req.body properties on the backend: ${req.body.title}`);
-  console.log("req.body stringified", JSON.stringify(req.body));
-
   const newObj = {
     title: req.body.title,
     authors: req.body.authors,
@@ -47,16 +42,6 @@ router.post("/", restricted, async (req, res) => {
     cover: req.body.cover,
     user_id: req.userId //comes from restricted middleware, don't change to req.body.userId. not being passed from FE in the same way as the rest of the data
   };
-
-  console.log("line 45", newObj);
-
-  console.log(
-    `I am a book called ${newObj.title} by ${
-      newObj.authors
-    } being passed into a the book POST endpoint in books-endpoints. Extra data: ${
-      newObj.cover
-    }, ${newObj.user_id}`
-  );
 
   try {
     const user = await db.insert(newObj);

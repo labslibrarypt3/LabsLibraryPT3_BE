@@ -24,13 +24,14 @@ function insert(transaction) {
   return db("User_Book").insert(transaction);
 }
 function update(entree) {
-  messages = entree.messages;
-  id = entree.bookId;
+  messages = entree.is_checked_out;
+  id = entree.book_id;
   console.log(messages, id, "in trans update helper");
   return db("User_Book")
     .update("is_checked_out", messages)
-    .where("bookId", id);
+    .where("book_id", id);
 }
 function getByBookId(book_id) {
-  return db("User_Book").where("book_id");
+  console.log(book_id, "im in the helper");
+  return db("User_Book").where(book_id);
 }

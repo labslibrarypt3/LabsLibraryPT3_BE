@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/user", restricted, async (req, res) => {
-  console.log("user-endpoints GET begin");
   id = req.userId;
   try {
     const user = await db.getById(id);
