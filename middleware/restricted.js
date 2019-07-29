@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 const restricted = function(req, res, next) {
   const token = req.headers.authorization;
   if (!token || token === null) {
-    res.redirect(`${baseUrl}/account`);
+    res.redirect(`/`);
   } else {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
       if (err) {
