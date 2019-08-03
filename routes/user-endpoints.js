@@ -34,6 +34,21 @@ router.post("/add", async (req, res) => {
     });
   }
 });
+
+// Add a user with post
+router.post("/adduser", async (req, res) => {
+  const enter = req.body;
+  try {
+    const user = await db.insert(enter);
+    res.status(201).json(user);
+  } catch (error) {
+    // log error to database
+    res.status(500).json({
+      message: "Error adding the User"
+    });
+  }
+});
+
 router.put("/update", restricted, async (req, res) => {
   console.log(req.userId);
   id = req.userId;
@@ -66,17 +81,5 @@ router.get("/get-libraries", async (req, res) => {
 });
 
 //get a list of lats and lngs and
-router.get("/get-libraries", async (req, res) => {
-  const user = await db.get();
-  const libraries = user.map(user => {
-    return {
-      latitude: user.latitude,
-      longitude: user.longitude,
-      userId: user.userId
-    };
-  });
-
-  res.status(200).json(libraries);
-});
 
 module.exports = router;

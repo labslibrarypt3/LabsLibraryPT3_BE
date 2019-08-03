@@ -93,7 +93,7 @@ router.post("/", async (req, res) => {
   try {
     const newTransaction = {
       lender_id: req.body.lender_id,
-      borrower_id: req.userId,
+      borrower_id: req.body.userId,
       book_id: req.body.book_id
     };
     const tran = await db.insert(newTransaction);
