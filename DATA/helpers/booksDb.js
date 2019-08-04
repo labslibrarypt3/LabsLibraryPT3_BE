@@ -14,6 +14,7 @@ function get() {
 }
 
 function getById(id) {
+  console.log(id, "inside helper");
   return db("Books").where("user_id", id);
 }
 

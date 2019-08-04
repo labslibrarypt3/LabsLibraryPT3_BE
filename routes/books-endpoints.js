@@ -14,11 +14,16 @@ router.get("/", async (req, res) => {
   }
 });
 router.get("/books", async (req, res) => {
-  console.log(
-    req.user_id,
+  console.log(req.query, "this is in  the mybooks components for a comparison");
+  try {
+    const user = await db.getById(req.query.user_id);
 
-    "this is in  the mybooks components for a comparison"
-  );
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving the Users"
+    });
+  }
 });
 router.get("/mybooks", restricted, async (req, res) => {
   const enter = req.userId;
@@ -33,7 +38,19 @@ router.get("/mybooks", restricted, async (req, res) => {
     });
   }
 });
+router.get("/userbooks", async (req, res) => {
+  console.log(req.body);
 
+  try {
+    const user = await db.getById(enter);
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving the Users"
+    });
+  }
+});
 router.post("/", restricted, async (req, res) => {
   const newObj = {
     title: req.body.title,
