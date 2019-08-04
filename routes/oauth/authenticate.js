@@ -62,18 +62,19 @@ router.post("/auth", async (req, res) => {
 });
 
 router.post("/manual", async (req, res) => {
+  console.log("regis got here");
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(req.body.password, salt);
-
   const user = req.body;
+  const email = await db.getByEmail(user.email);
 
-  if (!(await db.getByEmail(user.email))) {
+  if (!email) {
     const newUser = {
       name: user.name,
       email: user.email,
       password: hash
     };
-
+    console.log("newuser", newUser);
     try {
       const userO = await db.insert(newUser);
       res.status(200).json(newUser);
@@ -186,6 +187,7 @@ router.post("/forgot-password", async (req, res) => {
     });
   }
 });
+
 //reset password
 router.post("/reset-password", async (req, res) => {
   const newPass = req.body.newPassword;

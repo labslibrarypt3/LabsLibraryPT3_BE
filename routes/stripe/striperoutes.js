@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const clientId = process.env.STRIPE_CLIENT_ID;
 const request = require("request");
 // const restricted = require("../../middleware/restricted");
 
 const stateValue = Math.random()
   .toString(36)
   .slice(2);
-
-const stripeUrl = `https://connect.stripe.com/express/oauth/authorize?redirect_uri=https://pt3-neighborhood-library-back.herokuapp.com/api/stripe/token/&client_id=ca_FIasejiINwidFDyzoZ3EZ5Go8GKRfdsO&state=${stateValue}&suggested_capabilities[]=platform_payments`;
+//https://goofy-mayer-45bb20.netlify.com/stripe-connect-success
+const stripeUrl = `https://connect.stripe.com/express/oauth/authorize?redirect_uri=https://goofy-mayer-45bb20.netlify.com/stripe-connect-success&client_id=${clientId}&state=${stateValue}&suggested_capabilities[]=platform_payments`;
 
 router.get("/connect", async (req, res) => {
   //this is used to authorize data back from stripe
